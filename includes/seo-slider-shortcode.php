@@ -14,7 +14,7 @@ add_shortcode( 'slider', 'seo_slider_shortcode' );
  */
 function seo_slider_shortcode( $atts ) {
 
-	// Attributes
+	// Shortcode attributes.
 	$atts = shortcode_atts(
 		array(
 			'id' => '1',
@@ -32,6 +32,7 @@ function seo_slider_shortcode( $atts ) {
 	$autoplay    = ( get_post_meta( $id, $prefix . 'autoplay', true ) ? 'true' : 'false' );
 	$duration    = get_post_meta( $id, $prefix . 'duration', true );
 	$transition  = get_post_meta( $id, $prefix . 'transition', true );
+	$height      = get_post_meta( $id, $prefix . 'height', true );
 	$image       = get_post_meta( $id, $prefix . 'image', true );
 	$content     = get_post_meta( $id, $prefix . 'content', true );
 	$overlay     = get_post_meta( $id, $prefix . 'overlay', true );
@@ -68,6 +69,9 @@ function seo_slider_shortcode( $atts ) {
 	";
 
 	$css = "
+		.slick-slider-$id {
+			min-height: ${height}px;
+		}
 		.slick-slider-$id,
 		.slick-slider-$id p {
 			color: $text;
@@ -77,34 +81,42 @@ function seo_slider_shortcode( $atts ) {
 		}
 	";
 
-	if ( apply_filters( 'seo_slider_output_js', true ) ) {
+	if ( apply_filters( 'seo_slider_output_inline_js', true ) ) {
 
-		printf( '<script>%s</script>', $js );
+		printf( '<script>%s</script>', seo_slider_minify_js( $js ) );
 
 	}
 
-	if ( apply_filters( 'seo_slider_output_css', true ) ) {
+	if ( apply_filters( 'seo_slider_output_inline_css', true ) ) {
 
-		printf( '<style>%s</style>', $css );
+		printf( '<style>%s</style>', seo_slider_minify_css( $css ) );
 
 	}
 
 	?>
-	<section class="slick-slider slick-slider-<?php echo $id; ?>" role="banner">
+	<section class="slick-slider slick-slider-<?php echo esc_attr( $id ); ?>" role="banner" itemscope itemtype="http://schema.org/ImageGallery">
 
 		<?php foreach ( $slides as $slide ) : ?>
 
-		<div class="slick-slide" style="background-image:url('<?php echo $slide['seo_slider_image']; ?>')">
+		<figure class="slick-slide" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+
+			<?php
+			$img_args = array(
+				'itemprop' => 'image',
+			);
+			?>
+
+			<?php echo wp_get_attachment_image( $slide['seo_slider_image_id'], 'full', false, $img_args ); ?>
 
 			<div class="slick-overlay"></div>
 
-			<div class="slick-wrap">
+			<div class="slick-wrap" itemprop="description">
 
-			<?php echo wpautop( $slide['seo_slider_content'] ); ?>
+			<?php echo wp_kses_post( wpautop( $slide['seo_slider_content'] ) ); ?>
 
 			</div>
 
-		</div>
+		</figure>
 
 		<?php endforeach; ?>
 

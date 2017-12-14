@@ -20,11 +20,16 @@
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
+
 	die;
+
 }
 
 // Load CMB2.
 require_once( 'cmb2/init.php' );
+
+// Load slider helpers.
+require_once( 'includes/seo-slider-helpers.php' );
 
 // Load slider settings.
 require_once( 'includes/seo-slider-settings.php' );
@@ -47,7 +52,7 @@ function seo_slider_admin_scripts_styles() {
 	if ( get_current_screen()->id === 'slide' || get_current_screen()->id === 'edit-slide' ) {
 
 		// Slick CSS.
-		wp_enqueue_style( 'seo-slider', plugin_dir_url( __FILE__ ) . 'assets/styles/admin.css' );
+		wp_enqueue_style( 'seo-slider-admin', plugin_dir_url( __FILE__ ) . 'assets/styles/admin.css' );
 
 	}
 
@@ -59,18 +64,10 @@ add_action( 'wp_enqueue_scripts', 'seo_slider_scripts_styles' );
  */
 function seo_slider_scripts_styles() {
 
-	if ( apply_filters( 'seo_slider_output_css', true ) ) {
+	// Slick CSS.
+	wp_enqueue_style( 'seo-slider', plugin_dir_url( __FILE__ ) . 'assets/styles/styles.css' );
 
-		// Slick CSS.
-		wp_enqueue_style( 'slick', plugin_dir_url( __FILE__ ) . 'assets/styles/slick.css' );
-
-	}
-
-	if ( apply_filters( 'seo_slider_output_js', true ) ) {
-
-		// Slick JS.
-		wp_enqueue_script( 'slick', plugin_dir_url( __FILE__ ) . 'assets/scripts/slick.min.js', array( 'jquery' ) );
-
-	}
+	// Slick JS.
+	wp_enqueue_script( 'seo-slider', plugin_dir_url( __FILE__ ) . 'assets/scripts/scripts.js', array( 'jquery' ) );
 
 }

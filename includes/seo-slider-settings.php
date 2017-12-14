@@ -59,7 +59,7 @@ function seo_slider_register_metabox() {
 
 	/**
 	 * Initiate the metabox for slider settings.
-	 * 
+	 *
 	 * Displays in the side context.
 	 */
 	$slider_settings = new_cmb2_box( array(
@@ -131,7 +131,7 @@ function seo_slider_register_metabox() {
 
 	// Slide duration.
 	$slider_settings->add_field( array(
-		'name'            => __( 'Duration', 'seo-slider' ),
+		'name'            => __( 'Duration (ms)', 'seo-slider' ),
 		'desc'            => '',
 		'id'              => $prefix . 'duration',
 		'type'            => 'text',
@@ -144,11 +144,24 @@ function seo_slider_register_metabox() {
 
 	// Slide transition.
 	$slider_settings->add_field( array(
-		'name'            => __( 'Transition', 'seo-slider' ),
+		'name'            => __( 'Transition (ms)', 'seo-slider' ),
 		'desc'            => '',
 		'id'              => $prefix . 'transition',
 		'type'            => 'text',
 		'default'         => apply_filters( 'seo_slider_default_transition', '1000' ),
+		'attributes'      => array(
+			'type'    => 'number',
+			'pattern' => '\d*',
+		),
+	) );
+
+	// Slide transition.
+	$slider_settings->add_field( array(
+		'name'            => __( 'Min Height (px)', 'seo-slider' ),
+		'desc'            => '',
+		'id'              => $prefix . 'height',
+		'type'            => 'text',
+		'default'         => apply_filters( 'seo_slider_default_height', '600' ),
 		'attributes'      => array(
 			'type'    => 'number',
 			'pattern' => '\d*',
@@ -176,7 +189,7 @@ function seo_slider_register_metabox() {
 /**
  * Only return default value if we don't have a post ID (in the 'post' query variable)
  *
- * @param  bool  $default On/Off (true/false).
+ * @param  bool $default On/Off (true/false).
  *
  * @return mixed Returns true or '', the blank default.
  */

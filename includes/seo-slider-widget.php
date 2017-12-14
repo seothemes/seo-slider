@@ -38,7 +38,7 @@ class SEO_Slider_Widget extends WP_Widget {
 
 		echo $args['before_widget'];
 
-		echo do_shortcode( '[slider id="' . $id . '"]' );
+		echo do_shortcode( '[slider id="' . absint( $id ) . '"]' );
 
 		echo $args['after_widget'];
 
@@ -56,28 +56,27 @@ class SEO_Slider_Widget extends WP_Widget {
 
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Title:' ); ?></label>
-			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:' ); ?></label>
+			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id('slider'); ?>"><?php _e('Select Slider:', 'seo-slider'); ?></label>
-			<select name="<?php echo $this->get_field_name('slider'); ?>" id="<?php echo $this->get_field_id('slider'); ?>" class="widefat">
+			<label for="<?php echo esc_attr( $this->get_field_id( 'slider' ) ); ?>"><?php esc_html_e( 'Select Slider:', 'seo-slider' ); ?></label>
+			<select name="<?php echo esc_attr( $this->get_field_name( 'slider' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'slider' ) ); ?>" class="widefat">
 			<?php
-			$slides = get_posts( array(
+			$slides = new WP_Query( array(
 				'post_type'   => 'slide',
-				'numberposts' => -1,
+				'numberposts' => 99,
 			) );
 
-			if ( $slides ) {
+			while ( $slides->have_posts() ) :
 
-				foreach ( $slides as $slide ) {
+				$slides->the_post();
 
-					$name = get_the_title( $slide->ID );
+				$name = get_the_title();
 
-					echo '<option value="' . esc_attr( $name ) . '" id="' . esc_attr( $name ) . '"', $instance['slider'] === $name ? ' selected="selected"' : '', '>', esc_html( $name ), '</option>';
-				}
+				echo '<option value="' . esc_attr( $name ) . '" id="' . esc_attr( $name ) . '"', $instance['slider'] === $name ? ' selected="selected"' : '', '>', esc_html( $name ), '</option>';
 
-			}
+			endwhile;
 			?>
 			</select>
 		</p>
@@ -95,7 +94,7 @@ class SEO_Slider_Widget extends WP_Widget {
 
 		foreach ( $new_instance as $key => $value ) {
 
-			$updated_instance[$key] = sanitize_text_field( $value );
+			$updated_instance[ $key ] = sanitize_text_field( $value );
 
 		}
 
@@ -106,6 +105,8 @@ class SEO_Slider_Widget extends WP_Widget {
 }
 
 // Register the widget.
-add_action( 'widgets_init', function() { 
+add_action( 'widgets_init', function() {
+
 	register_widget( 'SEO_Slider_Widget' );
+
 } );
