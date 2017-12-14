@@ -9,6 +9,7 @@
  * Minify JS helper function.
  *
  * @param  string $js Input JS.
+ *
  * @return string
  */
 function seo_slider_minify_js( $js ) {
@@ -50,6 +51,7 @@ function seo_slider_minify_js( $js ) {
   * @author Gary Jones
   * @link   https://github.com/GaryJones/Simple-PHP-CSS-Minification
   * @param  string $css The CSS to minify.
+  *
   * @return string Minified CSS.
   */
 function seo_slider_minify_css( $css ) {

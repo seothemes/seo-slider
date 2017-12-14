@@ -25,16 +25,16 @@ if ( ! defined( 'WPINC' ) ) {
 
 }
 
-// Load CMB2.
+// Load CMB2 library.
 require_once( 'cmb2/init.php' );
 
-// Load slider helpers.
+// Load slider helper functions.
 require_once( 'includes/seo-slider-helpers.php' );
 
-// Load slider settings.
+// Load slider metabox settings.
 require_once( 'includes/seo-slider-settings.php' );
 
-// Load custom post type.
+// Load slider custom post type.
 require_once( 'includes/seo-slider-cpt.php' );
 
 // Load slider shortcode.
@@ -45,13 +45,13 @@ require_once( 'includes/seo-slider-widget.php' );
 
 add_action( 'admin_enqueue_scripts', 'seo_slider_admin_scripts_styles', 100 );
 /**
- * Register scripts and styles.
+ * Load admin scripts and styles.
  */
 function seo_slider_admin_scripts_styles() {
 
 	if ( get_current_screen()->id === 'slide' || get_current_screen()->id === 'edit-slide' ) {
 
-		// Slick CSS.
+		// Enqueue admin CSS.
 		wp_enqueue_style( 'seo-slider-admin', plugin_dir_url( __FILE__ ) . 'assets/styles/admin.css' );
 
 	}
@@ -60,14 +60,14 @@ function seo_slider_admin_scripts_styles() {
 
 add_action( 'wp_enqueue_scripts', 'seo_slider_scripts_styles' );
 /**
- * Register scripts and styles.
+ * Load frontend scripts and styles.
  */
 function seo_slider_scripts_styles() {
 
-	// Slick CSS.
+	// Enqueue frontend CSS.
 	wp_enqueue_style( 'seo-slider', plugin_dir_url( __FILE__ ) . 'assets/styles/styles.css' );
 
-	// Slick JS.
+	// Enqueue frontend JS.
 	wp_enqueue_script( 'seo-slider', plugin_dir_url( __FILE__ ) . 'assets/scripts/scripts.js', array( 'jquery' ) );
 
 }

@@ -7,14 +7,18 @@
 
 add_action( 'cmb2_admin_init', 'seo_slider_register_metabox' );
 /**
- * Hook in and add a metabox to demonstrate repeatable grouped fields
+ * Register slider metaboxes.
  */
 function seo_slider_register_metabox() {
 
+	// Field prefix.
 	$prefix = 'seo_slider_';
 
 	/**
-	 * Repeatable Field Groups
+	 * Repeatable Field Groups.
+	 *
+	 * Displays in the main context of the Edit Slider screen. The
+	 * parent field's id needs to be passed as the first argument.
 	 */
 	$slides_group = new_cmb2_box( array(
 		'id'           => $prefix . 'metabox',
@@ -22,7 +26,7 @@ function seo_slider_register_metabox() {
 		'object_types' => array( 'slide' ),
 	) );
 
-	// $group_field_id is the field id string, so in this case: slides.
+	// Add slides repeater field.
 	$group_field_id = $slides_group->add_field( array(
 		'id'          => $prefix . 'slides',
 		'type'        => 'group',
@@ -35,12 +39,7 @@ function seo_slider_register_metabox() {
 		),
 	) );
 
-	/**
-	 * Group fields works the same, except ids only need
-	 * to be unique to the group. Prefix is not needed.
-	 *
-	 * The parent field's id needs to be passed as the first argument.
-	 */
+	// Add image field to slides repeater field.
 	$slides_group->add_group_field( $group_field_id, array(
 		'name'         => __( 'Image', 'seo-slider' ),
 		'id'           => $prefix . 'image',
@@ -48,6 +47,7 @@ function seo_slider_register_metabox() {
 		'preview_size' => 'thumbnail',
 	) );
 
+	// Add content field to slides repeater field.
 	$slides_group->add_group_field( $group_field_id, array(
 		'name'           => __( 'Content', 'seo-slider' ),
 		'id'             => $prefix . 'content',
@@ -60,7 +60,7 @@ function seo_slider_register_metabox() {
 	/**
 	 * Initiate the metabox for slider settings.
 	 *
-	 * Displays in the side context.
+	 * Displays in the side context of the Edit Slider screen.
 	 */
 	$slider_settings = new_cmb2_box( array(
 		'id'            => $prefix . 'settings',
@@ -71,6 +71,7 @@ function seo_slider_register_metabox() {
 		'show_names'    => true,
 	) );
 
+	// Add overlay color field.
 	$slider_settings->add_field( array(
 		'name'    => __( 'Overlay', 'seo-slider' ),
 		'id'      => $prefix . 'overlay',
@@ -81,6 +82,7 @@ function seo_slider_register_metabox() {
 		),
 	) );
 
+	// Add text color field.
 	$slider_settings->add_field( array(
 		'name'    => __( 'Text', 'seo-slider' ),
 		'id'      => $prefix . 'text',
@@ -91,7 +93,7 @@ function seo_slider_register_metabox() {
 		),
 	) );
 
-	// Settings.
+	// Add title field.
 	$slider_settings->add_field( array(
 		'name' => 'Display settings',
 		'desc' => '',
@@ -99,7 +101,7 @@ function seo_slider_register_metabox() {
 		'type' => 'title',
 	) );
 
-	// Display settings.
+	// Add dots field.
 	$slider_settings->add_field( array(
 		'name'    => '',
 		'desc'    => 'Display dots',
@@ -107,6 +109,8 @@ function seo_slider_register_metabox() {
 		'type'    => 'checkbox',
 		'default' => seo_slider_set_checkbox_default( true ),
 	) );
+
+	// Add arrows field.
 	$slider_settings->add_field( array(
 		'name'    => '',
 		'desc'    => 'Display arrows',
@@ -114,6 +118,8 @@ function seo_slider_register_metabox() {
 		'type'    => 'checkbox',
 		'default' => seo_slider_set_checkbox_default( true ),
 	) );
+
+	// Add loop field.
 	$slider_settings->add_field( array(
 		'name'    => '',
 		'desc'    => 'Loop slider',
@@ -121,6 +127,8 @@ function seo_slider_register_metabox() {
 		'type'    => 'checkbox',
 		'default' => seo_slider_set_checkbox_default( true ),
 	) );
+
+	// Add autoplay field.
 	$slider_settings->add_field( array(
 		'name'    => '',
 		'desc'    => 'Enable autoplay',
@@ -129,7 +137,7 @@ function seo_slider_register_metabox() {
 		'default' => seo_slider_set_checkbox_default( true ),
 	) );
 
-	// Slide duration.
+	// Add duration field.
 	$slider_settings->add_field( array(
 		'name'            => __( 'Duration (ms)', 'seo-slider' ),
 		'desc'            => '',
@@ -142,7 +150,7 @@ function seo_slider_register_metabox() {
 		),
 	) );
 
-	// Slide transition.
+	// Add transition field.
 	$slider_settings->add_field( array(
 		'name'            => __( 'Transition (ms)', 'seo-slider' ),
 		'desc'            => '',
@@ -155,7 +163,7 @@ function seo_slider_register_metabox() {
 		),
 	) );
 
-	// Slide transition.
+	// Add height field.
 	$slider_settings->add_field( array(
 		'name'            => __( 'Min Height (px)', 'seo-slider' ),
 		'desc'            => '',
@@ -168,7 +176,7 @@ function seo_slider_register_metabox() {
 		),
 	) );
 
-	// Shortcode field.
+	// Add shortcode field.
 	$slider_settings->add_field( array(
 		'name'      => __( 'Shortcode', 'seo-slider' ),
 		'default'   => 'seo_slider_set_shortcode_id',
@@ -187,7 +195,7 @@ function seo_slider_register_metabox() {
 }
 
 /**
- * Only return default value if we don't have a post ID (in the 'post' query variable)
+ * Only return default value if we don't have a post ID (in the 'post' query variable).
  *
  * @param  bool $default On/Off (true/false).
  *

@@ -1,6 +1,6 @@
 <?php
 /**
- * This file registers the Sliders custom post type.
+ * This file registers the Slider custom post type.
  *
  * @package SEOSlider
  */
