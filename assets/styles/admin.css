@@ -1,0 +1,40 @@
+.post-type-slide .cmb-type-group .cmb-repeatable-group:not(:last-of-type),
+.post-type-slide .cmb-type-group .cmb-row:not(:last-of-type),
+.post-type-slide .cmb2-postbox .cmb-repeatable-group:not(:last-of-type),
+.post-type-slide .cmb2-postbox .cmb-row:not(:last-of-type),
+.post-type-slide #side-sortables .cmb2-wrap>.cmb-field-list>.cmb-row,
+.post-type-slide .inner-sidebar .cmb2-wrap>.cmb-field-list>.cmb-row,
+.post-type-slide #side-sortables .cmb-th,
+.post-type-slide .inner-sidebar .cmb-th {
+	border-bottom: none;
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+.post-type-slide .postbox.cmb-row.cmb-repeatable-grouping.closed {
+    margin-bottom: 1em;
+}
+
+.post-type-slide .cmb2-id-seo-slider-dots span.cmb2-metabox-description,
+.post-type-slide .cmb2-id-seo-slider-arrows span.cmb2-metabox-description,
+.post-type-slide .cmb2-id-seo-slider-loop span.cmb2-metabox-description,
+.post-type-slide .cmb2-id-seo-slider-autoplay span.cmb2-metabox-description,
+.post-type-slide #side-sortables .cmb2-metabox-title,
+.post-type-slide .inner-sidebar .cmb2-metabox-title {
+    font-size: 14px;
+	font-style: normal;
+	color: #444;
+}
+
+.post-type-slide #side-sortables .cmb-th label,
+.post-type-slide .inner-sidebar .cmb-th label {
+	font-weight: 600;
+}
+
+.post-type-slide span.color-alpha {
+	height: 22px !important;
+}
+
+.post-type-slide .column-hidden {
+	display: table-cell;
+}

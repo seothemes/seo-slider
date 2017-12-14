@@ -19,10 +19,10 @@ class SEO_Slider_Widget extends WP_Widget {
 
 		$widget_ops = array(
 			'classname'   => 'seo_slider_widget',
-			'description' => 'Displays the SEO Slider in a widget',
+			'description' => 'Displays a slider in a widget.',
 		);
 
-		parent::__construct( 'seo_slider_widget', 'SEO Slider Widget', $widget_ops );
+		parent::__construct( 'seo_slider_widget', 'Slider', $widget_ops );
 	}
 
 	/**
@@ -34,15 +34,12 @@ class SEO_Slider_Widget extends WP_Widget {
 	 */
 	public function widget( $args, $instance ) {
 
+		$id = get_page_by_title( $instance['slider'], OBJECT, 'slide' )->ID;
+
 		echo $args['before_widget'];
 
-		if ( ! empty( $instance['title'] ) ) {
+		echo do_shortcode( '[slider id="' . $id . '"]' );
 
-			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
-
-		}
-
-		echo esc_html__( 'Hello, World!', 'seo-slider' );
 		echo $args['after_widget'];
 
 	}
@@ -55,11 +52,34 @@ class SEO_Slider_Widget extends WP_Widget {
 	 */
 	public function form( $instance ) {
 
-		$title = ! empty( $instance['title'] ) ? $instance['title'] : __( 'New title', 'seo-slider' );
+		$title = ! empty( $instance['title'] ) ? $instance['title'] : __( 'Slider', 'seo-slider' );
+
 		?>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Title:' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id('slider'); ?>"><?php _e('Select Slider:', 'seo-slider'); ?></label>
+			<select name="<?php echo $this->get_field_name('slider'); ?>" id="<?php echo $this->get_field_id('slider'); ?>" class="widefat">
+			<?php
+			$slides = get_posts( array(
+				'post_type'   => 'slide',
+				'numberposts' => -1,
+			) );
+
+			if ( $slides ) {
+
+				foreach ( $slides as $slide ) {
+
+					$name = get_the_title( $slide->ID );
+
+					echo '<option value="' . esc_attr( $name ) . '" id="' . esc_attr( $name ) . '"', $instance['slider'] === $name ? ' selected="selected"' : '', '>', esc_html( $name ), '</option>';
+				}
+
+			}
+			?>
+			</select>
 		</p>
 		<?php
 	}

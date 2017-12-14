@@ -5,9 +5,9 @@
  *
  * @category  WordPress_Plugin
  * @package   CMB2
- * @author    WebDevStudios
+ * @author    CMB2 team
  * @license   GPL-2.0+
- * @link      http://webdevstudios.com
+ * @link      https://cmb2.io
  */
 class CMB2_Boxes {
 
@@ -31,7 +31,7 @@ class CMB2_Boxes {
 	}
 
 	/**
-	 * Remove a CMB2 instance object to the registry.
+	 * Remove a CMB2 instance object from the registry.
 	 *
 	 * @since 1.X.X
 	 *
@@ -64,10 +64,33 @@ class CMB2_Boxes {
 	 * Retrieve all CMB2 instances registered.
 	 *
 	 * @since  1.X.X
-	 * @return CMB2[] Array of all registered metaboxes.
+	 * @return CMB2[] Array of all registered cmb2 instances.
 	 */
 	public static function get_all() {
 		return self::$cmb2_instances;
+	}
+
+	/**
+	 * Retrieve all CMB2 instances that have the specified property set.
+	 *
+	 * @since  2.2.3
+	 * @param  string $property Property name.
+	 * @param  mixed  $ignore   The value to ignore.
+	 * @return CMB2[]           Array of matching cmb2 instances.
+	 */
+	public static function get_by_property( $property, $ignore = null ) {
+		$boxes = array();
+
+		foreach ( self::$cmb2_instances as $cmb_id => $cmb ) {
+
+			if ( $ignore === $cmb->prop( $property ) ) {
+				continue;
+			}
+
+			$boxes[ $cmb_id ] = $cmb;
+		}
+
+		return $boxes;
 	}
 
 }

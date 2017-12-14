@@ -5,6 +5,7 @@
  * @package SEOSlider
  */
 
+add_shortcode( 'slider', 'seo_slider_shortcode' );
 /**
  * Add shortcode.
  *
@@ -13,71 +14,102 @@
  */
 function seo_slider_shortcode( $atts ) {
 
-	$terms = get_terms( 'slider', array(
-		'hide_empty' => 0,
-		'fields'     => 'ids',
-	) );
-
+	// Attributes
 	$atts = shortcode_atts(
 		array(
-			'post_type'      => 'slide',
-			'posts_per_page' => '5',
-			'tax_query'      => array(
-				array(
-					'taxonomy' => 'slider',
-					'field'    => 'ids',
-					'terms'    => $terms,
-				),
-			),
+			'id' => '1',
 		),
-		$atts,
-		'slider'
+		$atts
 	);
 
-	// Loop through slides.
-	$query = new WP_Query( $atts );
+	$id     = $atts['id'];
+	$prefix = 'seo_slider_';
 
-	ob_start();
+	// Get slider settings.
+	$dots        = ( get_post_meta( $id, $prefix . 'dots', true ) ? 'true' : 'false' );
+	$arrows      = ( get_post_meta( $id, $prefix . 'arrows', true ) ? 'true' : 'false' );
+	$loop        = ( get_post_meta( $id, $prefix . 'loop', true ) ? 'true' : 'false' );
+	$autoplay    = ( get_post_meta( $id, $prefix . 'autoplay', true ) ? 'true' : 'false' );
+	$duration    = get_post_meta( $id, $prefix . 'duration', true );
+	$transition  = get_post_meta( $id, $prefix . 'transition', true );
+	$image       = get_post_meta( $id, $prefix . 'image', true );
+	$content     = get_post_meta( $id, $prefix . 'content', true );
+	$overlay     = get_post_meta( $id, $prefix . 'overlay', true );
+	$text        = get_post_meta( $id, $prefix . 'text', true );
+	$slides      = get_post_meta( $id, $prefix . 'slides', true );
 
-	if ( $query->have_posts() ) :
+	$js = "
+	jQuery( document ).ready( function($) {
+		$( '.slick-slider-$id' ).slick( {
+			dots: $dots,
+			infinite: $loop,
+			speed: $transition,
+			arrows: $arrows,
+			autoplay: $autoplay,
+			autoplaySpeed: $duration,
+			slidesToShow: 1	,
+			slidesToScroll: 1,
+			responsive: [
+				{
+					breakpoint: 1024,
+					settings: {
+						slidesToShow: 1,
+					}
+				},
+				{
+					breakpoint: 640,
+					settings: {
+						slidesToShow: 1,
+					}
+				}
+			]
+		} );	
+	} );
+	";
 
-		echo '<section class="slick-slider" role="banner">';
+	$css = "
+		.slick-slider-$id,
+		.slick-slider-$id p {
+			color: $text;
+		}
+		.slick-slider-$id .slick-overlay {
+			background-color: $overlay;
+		}
+	";
 
-		while ( $query->have_posts() ) :
+	if ( apply_filters( 'seo_slider_output_js', true ) ) {
 
-			$query->the_post();
+		printf( '<script>%s</script>', $js );
 
-			?>
-			<div class="slick-slide" style="background-image:url('<?php the_post_thumbnail_url(); ?>')">
+	}
 
-				<div class="wrap container">
+	if ( apply_filters( 'seo_slider_output_css', true ) ) {
 
-				<?php $markup = '<h2 class="slide-title">%s</h2>'; ?>
+		printf( '<style>%s</style>', $css );
 
-					<?php echo apply_filters( 'seo_slider_title_markup', sprintf( $markup, get_the_title() ) ); ?>
+	}
 
-					<?php the_content(); ?>
+	?>
+	<section class="slick-slider slick-slider-<?php echo $id; ?>" role="banner">
 
-				</div>
+		<?php foreach ( $slides as $slide ) : ?>
 
-				</figcaption>
+		<div class="slick-slide" style="background-image:url('<?php echo $slide['seo_slider_image']; ?>')">
+
+			<div class="slick-overlay"></div>
+
+			<div class="slick-wrap">
+
+			<?php echo wpautop( $slide['seo_slider_content'] ); ?>
 
 			</div>
-			<?php
 
-		endwhile;
+		</div>
 
-		echo '</section>';
+		<?php endforeach; ?>
 
-	endif;
+	</section>
 
-	$slider = ob_get_clean();
-
-	// Reset query.
-	wp_reset_query();
-
-	return $slider;
-
+	<?php
 
 }
-add_shortcode( 'slider', 'seo_slider_shortcode' );

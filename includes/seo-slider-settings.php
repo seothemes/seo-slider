@@ -1,281 +1,203 @@
 <?php
 /**
- * This file adds the plugin settings.
+ * This file registers the settings for the SEO Slider plugin.
  *
- * @package SEO_Slider
+ * @package SEOSlider
  */
 
-add_filter( 'plugin_action_links_' . plugin_basename( plugin_dir_path( __DIR__ ) . 'seo-slider.php' ), 'seo_slider_action_links' );
+add_action( 'cmb2_admin_init', 'seo_slider_register_metabox' );
 /**
- * Add settings link.
- *
- * @param  array $links Plugin links.
- *
- * @return array
+ * Hook in and add a metabox to demonstrate repeatable grouped fields
  */
-function seo_slider_action_links( $links ) {
+function seo_slider_register_metabox() {
 
-	$settings_link = array(
-		'<a href="' . admin_url( 'options-general.php?page=seo_slider' ) . '">Settings</a>',
-	);
+	$prefix = 'seo_slider_';
 
-	return array_merge( $links, $settings_link );
+	/**
+	 * Repeatable Field Groups
+	 */
+	$slides_group = new_cmb2_box( array(
+		'id'           => $prefix . 'metabox',
+		'title'        => __( 'Slides', 'seo-slider' ),
+		'object_types' => array( 'slide' ),
+	) );
 
-}
+	// $group_field_id is the field id string, so in this case: slides.
+	$group_field_id = $slides_group->add_field( array(
+		'id'          => $prefix . 'slides',
+		'type'        => 'group',
+		'description' => '',
+		'options'     => array(
+			'group_title'   => __( 'Slide {#}', 'seo-slider' ),
+			'add_button'    => __( 'Add Slide', 'seo-slider' ),
+			'remove_button' => __( 'Remove Slide', 'seo-slider' ),
+			'sortable'      => true,
+		),
+	) );
 
-add_action( 'admin_menu', 'seo_slider_add_admin_menu' );
-/**
- * Add settings menu item.
- *
- * @return void
- */
-function seo_slider_add_admin_menu() {
+	/**
+	 * Group fields works the same, except ids only need
+	 * to be unique to the group. Prefix is not needed.
+	 *
+	 * The parent field's id needs to be passed as the first argument.
+	 */
+	$slides_group->add_group_field( $group_field_id, array(
+		'name'         => __( 'Image', 'seo-slider' ),
+		'id'           => $prefix . 'image',
+		'type'         => 'file',
+		'preview_size' => 'thumbnail',
+	) );
 
-	add_options_page( 'SEO Slider', 'SEO Slider', 'manage_options', 'seo_slider', 'seo_slider_options_page' );
+	$slides_group->add_group_field( $group_field_id, array(
+		'name'           => __( 'Content', 'seo-slider' ),
+		'id'             => $prefix . 'content',
+		'type'           => 'wysiwyg',
+		'options'        => array(
+			'textarea_rows' => get_option( 'default_post_edit_rows', 10 ),
+		),
+	) );
 
-}
+	/**
+	 * Initiate the metabox for slider settings.
+	 * 
+	 * Displays in the side context.
+	 */
+	$slider_settings = new_cmb2_box( array(
+		'id'            => $prefix . 'settings',
+		'title'         => __( 'Slider Settings', 'seo-slider' ),
+		'object_types'  => array( 'slide' ),
+		'context'       => 'side',
+		'priority'      => 'default',
+		'show_names'    => true,
+	) );
 
-add_action( 'admin_init', 'seo_slider_settings_init' );
-/**
- * Initialize settings.
- *
- * @return void
- */
-function seo_slider_settings_init() {
+	$slider_settings->add_field( array(
+		'name'    => __( 'Overlay', 'seo-slider' ),
+		'id'      => $prefix . 'overlay',
+		'type'    => 'colorpicker',
+		'default' => apply_filters( 'seo_slider_default_overlay', 'rgba(10,20,30,0.2)' ),
+		'options' => array(
+			'alpha' => true,
+		),
+	) );
 
-	register_setting( 'seo_slider_setting', 'seo_slider_settings' );
+	$slider_settings->add_field( array(
+		'name'    => __( 'Text', 'seo-slider' ),
+		'id'      => $prefix . 'text',
+		'type'    => 'colorpicker',
+		'default' => apply_filters( 'seo_slider_default_text', '#ffffff' ),
+		'options' => array(
+			'alpha' => true,
+		),
+	) );
 
-	add_settings_section(
-		'seo_slider_section',
-		__( 'Settings page for the SEO Slider plugin.', 'seo-slider' ),
-		'seo_slider_settings_section_callback',
-		'seo_slider_setting'
-	);
+	// Settings.
+	$slider_settings->add_field( array(
+		'name' => 'Display settings',
+		'desc' => '',
+		'id'   => $prefix . 'display',
+		'type' => 'title',
+	) );
 
-	add_settings_field(
-		'dots',
-		__( 'Display navigation dots', 'seo-slider' ),
-		'dots_render',
-		'seo_slider_setting',
-		'seo_slider_section'
-	);
+	// Display settings.
+	$slider_settings->add_field( array(
+		'name'    => '',
+		'desc'    => 'Display dots',
+		'id'      => $prefix . 'dots',
+		'type'    => 'checkbox',
+		'default' => seo_slider_set_checkbox_default( true ),
+	) );
+	$slider_settings->add_field( array(
+		'name'    => '',
+		'desc'    => 'Display arrows',
+		'id'      => $prefix . 'arrows',
+		'type'    => 'checkbox',
+		'default' => seo_slider_set_checkbox_default( true ),
+	) );
+	$slider_settings->add_field( array(
+		'name'    => '',
+		'desc'    => 'Loop slider',
+		'id'      => $prefix . 'loop',
+		'type'    => 'checkbox',
+		'default' => seo_slider_set_checkbox_default( true ),
+	) );
+	$slider_settings->add_field( array(
+		'name'    => '',
+		'desc'    => 'Enable autoplay',
+		'id'      => $prefix . 'autoplay',
+		'type'    => 'checkbox',
+		'default' => seo_slider_set_checkbox_default( true ),
+	) );
 
-	add_settings_field(
-		'arrows',
-		__( 'Display navigation arrows', 'seo-slider' ),
-		'seo_slider_arrows_render',
-		'seo_slider_setting',
-		'seo_slider_section'
-	);
+	// Slide duration.
+	$slider_settings->add_field( array(
+		'name'            => __( 'Duration', 'seo-slider' ),
+		'desc'            => '',
+		'id'              => $prefix . 'duration',
+		'type'            => 'text',
+		'default'         => apply_filters( 'seo_slider_default_duration', '5000' ),
+		'attributes'      => array(
+			'type'    => 'number',
+			'pattern' => '\d*',
+		),
+	) );
 
-	add_settings_field(
-		'loop',
-		__( 'Loop', 'seo-slider' ),
-		'seo_slider_loop_render',
-		'seo_slider_setting',
-		'seo_slider_section'
-	);
+	// Slide transition.
+	$slider_settings->add_field( array(
+		'name'            => __( 'Transition', 'seo-slider' ),
+		'desc'            => '',
+		'id'              => $prefix . 'transition',
+		'type'            => 'text',
+		'default'         => apply_filters( 'seo_slider_default_transition', '1000' ),
+		'attributes'      => array(
+			'type'    => 'number',
+			'pattern' => '\d*',
+		),
+	) );
 
-	add_settings_field(
-		'autoplay',
-		__( 'Autoplay', 'seo-slider' ),
-		'seo_slider_autoplay_render',
-		'seo_slider_setting',
-		'seo_slider_section'
-	);
-
-	add_settings_field(
-		'speed',
-		__( 'Speed (in milliseconds)', 'seo-slider' ),
-		'seo_slider_speed_render',
-		'seo_slider_setting',
-		'seo_slider_section'
-	);
-
-	add_settings_field(
-		'transition',
-		__( 'Transition (in milliseconds)', 'seo-slider' ),
-		'transition_render',
-		'seo_slider_setting',
-		'seo_slider_section'
-	);
-
-}
-
-/**
- * Render dots.
- *
- * @return void
- */
-function seo_slider_dots_render() {
-
-	$options = get_option( 'seo_slider_settings' );
-	?>
-	<input type='checkbox' name='seo_slider_settings[dots]' <?php checked( $options['dots'], 1 ); ?> value='1'>
-	<?php
-
-}
-
-/**
- * Render arrows.
- *
- * @return void
- */
-function seo_slider_arrows_render() {
-
-	$options = get_option( 'seo_slider_settings' );
-	?>
-	<input type='checkbox' name='seo_slider_settings[arrows]' <?php checked( $options['arrows'], 1 ); ?> value='1'>
-	<?php
-
-}
-
-/**
- * Render loop.
- *
- * @return void
- */
-function seo_slider_loop_render() {
-
-	$options = get_option( 'seo_slider_settings' );
-	?>
-	<input type='checkbox' name='seo_slider_settings[loop]' <?php checked( $options['loop'], 1 ); ?> value='1'>
-	<?php
-
-}
-
-/**
- * Render autoplay.
- *
- * @return void
- */
-function seo_slider_autoplay_render() {
-
-	$options = get_option( 'seo_slider_settings' );
-	?>
-	<input type='checkbox' name='seo_slider_settings[autoplay]' <?php checked( $options['autoplay'], 1 ); ?> value='1'>
-	<?php
-
-}
-
-/**
- * Render radio.
- *
- * @return void
- */
-function seo_slider_radio_field_1_render() {
-
-	$options = get_option( 'seo_slider_settings' );
-	?>
-	<input type='radio' name='seo_slider_settings[seo_slider_radio_field_1]' <?php checked( $options['seo_slider_radio_field_1'], 0 ); ?> value='0' id="false">
-	<label for="false">Before title &nbsp;</label>
-	<input type='radio' name='seo_slider_settings[seo_slider_radio_field_1]' <?php checked( $options['seo_slider_radio_field_1'], 1 ); ?> value='1' id="true">
-	<label for="true">After title</label>
-	<?php
-
-}
-
-/**
- * Render select dropdown.
- *
- * @return void
- */
-function seo_slider_font_render() {
-
-	$options  = get_option( 'seo_slider_settings' );
-	$selected = $options['font'] ? $options['font'] : 'font-awesome';
-
-	?>
-	<select name='seo_slider_settings[font]'>
-		<option value='font-awesome' <?php selected( $selected, 'font-awesome' ); ?>><?php esc_html_e( 'Font Awesome', 'seo-slider' ); ?></option>
-		<option value='line-awesome' <?php selected( $selected, 'line-awesome' ); ?>><?php esc_html_e( 'Line Awesome', 'seo-slider' ); ?></option>
-		<option value='ionicons' <?php selected( $selected, 'ionicons' ); ?>><?php esc_html_e( 'Ionicons', 'seo-slider' ); ?></option>
-	</select>
-
-<?php
+	// Shortcode field.
+	$slider_settings->add_field( array(
+		'name'      => __( 'Shortcode', 'seo-slider' ),
+		'default'   => 'seo_slider_set_shortcode_id',
+		'id'        => $prefix . 'shortcode',
+		'type'      => 'text',
+		'column'    => array(
+			'position' => 2,
+			'name'     => 'Shortcode',
+		),
+		'attributes'      => array(
+			'readonly' => '',
+			'onClick'  => 'this.select();',
+		),
+	) );
 
 }
 
 /**
- * Render text field.
+ * Only return default value if we don't have a post ID (in the 'post' query variable)
  *
- * @return void
+ * @param  bool  $default On/Off (true/false).
+ *
+ * @return mixed Returns true or '', the blank default.
  */
-function seo_slider_speed_render() {
+function seo_slider_set_checkbox_default( $default ) {
 
-	$options = get_option( 'seo_slider_settings' );
-	?>
-	<input type='number' name='seo_slider_settings[speed]' value='<?php echo $options['speed']; ?>'>
-	<?php
+	return isset( $_GET['post'] ) ? '' : ( $default ? (string) $default : '' );
 
 }
 
 /**
- * Render text field.
+ * Set post ID for shortcode.
  *
- * @return void
- */
-function seo_slider_transition_render() {
-	
-	$options = get_option( 'seo_slider_settings' );
-	?>
-	<input type='number' name='seo_slider_settings[transition]' value='<?php echo $options['transition']; ?>'>
-	<?php
-
-}
-
-/**
- * Render textarea.
+ * @param  array $args  Field args.
+ * @param  array $field Field object.
  *
- * @return void
+ * @return string
  */
-function seo_slider_textarea_field_4_render() {
+function seo_slider_set_shortcode_id( $args, $field ) {
 
-	$options = get_option( 'seo_slider_settings' );
-	?>
-	<textarea cols='40' rows='5' name='seo_slider_settings[seo_slider_textarea_field_4]'> 
-		<?php echo $options['seo_slider_textarea_field_4']; ?>
- 	</textarea>
-	<?php
+	$id = $field->args['attributes']['data-postid'] = $field->object_id;
 
-}
-
-/**
- * Section description.
- *
- * @return void
- */
-function seo_slider_settings_section_callback() {
-
-	// Section description.
-	echo __( '', 'seo-slider' );
-
-}
-
-/**
- * Display options page.
- *
- * @return void
- */
-function seo_slider_options_page() {
-
-	?>
-	<div class="wrap">
-
-	<h1>SEO Slider</h1>
-
-	<form action='options.php' method='post'>
-
-		<?php
-		settings_fields( 'seo_slider_setting' );
-		do_settings_sections( 'seo_slider_setting' );
-		submit_button();
-		?>
-
-	</form>
-
-	</div>
-
-	<?php
+	return sprintf( '[slider id="%s"]', $id );
 
 }

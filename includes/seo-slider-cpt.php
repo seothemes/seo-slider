@@ -1,6 +1,6 @@
 <?php
 /**
- * This file registers the Slides custom post type.
+ * This file registers the Sliders custom post type.
  *
  * @package SEOSlider
  */
@@ -11,22 +11,22 @@
 function seo_slider_cpt() {
 
 	$labels = array(
-		'name'                  => _x( 'Slides', 'Slide General Name', 'seo-slider' ),
-		'singular_name'         => _x( 'Slide', 'Slide Singular Name', 'seo-slider' ),
-		'menu_name'             => __( 'Slides', 'seo-slider' ),
-		'name_admin_bar'        => __( 'Slide', 'seo-slider' ),
-		'archives'              => __( 'Slide Archives', 'seo-slider' ),
-		'attributes'            => __( 'Slide Attributes', 'seo-slider' ),
-		'parent_item_colon'     => __( 'Parent Slide:', 'seo-slider' ),
-		'all_items'             => __( 'All Slides', 'seo-slider' ),
-		'add_new_item'          => __( 'Add New Slide', 'seo-slider' ),
+		'name'                  => _x( 'Sliders', 'Slider General Name', 'seo-slider' ),
+		'singular_name'         => _x( 'Slider', 'Slider Singular Name', 'seo-slider' ),
+		'menu_name'             => __( 'Sliders', 'seo-slider' ),
+		'name_admin_bar'        => __( 'Slider', 'seo-slider' ),
+		'archives'              => __( 'Slider Archives', 'seo-slider' ),
+		'attributes'            => __( 'Slider Attributes', 'seo-slider' ),
+		'parent_item_colon'     => __( 'Parent Slider:', 'seo-slider' ),
+		'all_items'             => __( 'All Sliders', 'seo-slider' ),
+		'add_new_item'          => __( 'Add New Slider', 'seo-slider' ),
 		'add_new'               => __( 'Add New', 'seo-slider' ),
-		'new_item'              => __( 'New Slide', 'seo-slider' ),
-		'edit_item'             => __( 'Edit Slide', 'seo-slider' ),
-		'update_item'           => __( 'Update Slide', 'seo-slider' ),
-		'view_item'             => __( 'View Slide', 'seo-slider' ),
-		'view_items'            => __( 'View Slides', 'seo-slider' ),
-		'search_items'          => __( 'Search Slide', 'seo-slider' ),
+		'new_item'              => __( 'New Slider', 'seo-slider' ),
+		'edit_item'             => __( 'Edit Slider', 'seo-slider' ),
+		'update_item'           => __( 'Update Slider', 'seo-slider' ),
+		'view_item'             => __( 'View Slider', 'seo-slider' ),
+		'view_items'            => __( 'View Sliders', 'seo-slider' ),
+		'search_items'          => __( 'Search Slider', 'seo-slider' ),
 		'not_found'             => __( 'Not found', 'seo-slider' ),
 		'not_found_in_trash'    => __( 'Not found in Trash', 'seo-slider' ),
 		'featured_image'        => __( 'Featured Image', 'seo-slider' ),
@@ -35,16 +35,15 @@ function seo_slider_cpt() {
 		'use_featured_image'    => __( 'Use as featured image', 'seo-slider' ),
 		'insert_into_item'      => __( 'Insert into slide', 'seo-slider' ),
 		'uploaded_to_this_item' => __( 'Uploaded to this slide', 'seo-slider' ),
-		'items_list'            => __( 'Slides list', 'seo-slider' ),
-		'items_list_navigation' => __( 'Slides list navigation', 'seo-slider' ),
+		'items_list'            => __( 'Sliders list', 'seo-slider' ),
+		'items_list_navigation' => __( 'Sliders list navigation', 'seo-slider' ),
 		'filter_items_list'     => __( 'Filter slides list', 'seo-slider' ),
 	);
 	$args = array(
-		'label'                 => __( 'Slide', 'seo-slider' ),
-		'description'           => __( 'Slide Description', 'seo-slider' ),
+		'label'                 => __( 'Slider', 'seo-slider' ),
+		'description'           => __( 'Slider Description', 'seo-slider' ),
 		'labels'                => $labels,
-		'supports'              => array( 'title', 'editor', 'thumbnail' ),
-		'taxonomies'            => array( 'slider' ),
+		'supports'              => array( 'title' ),
 		'hierarchical'          => false,
 		'public'                => false,
 		'show_ui'               => true,
