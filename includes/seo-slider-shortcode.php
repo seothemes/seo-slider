@@ -107,6 +107,7 @@ function seo_slider_shortcode( $atts ) {
 
 			<?php
 			$img_args = array(
+				'class'    => 'slick-image',
 				'itemprop' => 'image',
 			);
 			?>
@@ -117,11 +118,15 @@ function seo_slider_shortcode( $atts ) {
 
 			<?php do_action( 'seo_slider_before_wrap' ); ?>
 
-			<div class="slick-wrap" itemprop="description">
+			<div class="slick-wrap">
 
 				<?php do_action( 'seo_slider_before_content' ); ?>
 
+				<div class="slick-content" itemprop="description">
+
 				<?php echo wp_kses_post( wpautop( $slide['seo_slider_content'] ) ); ?>
+
+				</div>
 
 				<?php do_action( 'seo_slider_after_content' ); ?>
 
