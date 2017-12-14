@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: SEO Slider
- * Plugin URI:  https://seothemes.com
- * Description: A search engined optimized, accessible and responsive slider plugin.
+ * Plugin URI:  https://seothemes.com/plugins/seo-slider
+ * Description: A search engined optimized, accessibility ready and mobile responsive slider plugin.
  * Author:      SEO Themes
  * Author URI:  https://seothemes.com
  * Version:     0.1.0
@@ -12,7 +12,7 @@
  * License URI: http://www.opensource.org/licenses/gpl-license.php
  *
  * @package     SEOSlider
- * @link        https://seothemes.com/seo-slider
+ * @link        https://seothemes.com/plugins/seo-slider
  * @author      Seo Themes
  * @copyright   Copyright © 2017 Seo Themes
  * @license     GPL-2.0+

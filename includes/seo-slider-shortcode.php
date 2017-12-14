@@ -94,9 +94,14 @@ function seo_slider_shortcode( $atts ) {
 	}
 
 	?>
+
+	<?php do_action( 'seo_slider_before_slider' ); ?>
+
 	<section class="slick-slider slick-slider-<?php echo esc_attr( $id ); ?>" role="banner" itemscope itemtype="http://schema.org/ImageGallery">
 
 		<?php foreach ( $slides as $slide ) : ?>
+
+		<?php do_action( 'seo_slider_before_slide' ); ?>
 
 		<figure class="slick-slide" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
 
@@ -110,17 +115,29 @@ function seo_slider_shortcode( $atts ) {
 
 			<div class="slick-overlay"></div>
 
+			<?php do_action( 'seo_slider_before_wrap' ); ?>
+
 			<div class="slick-wrap" itemprop="description">
 
-			<?php echo wp_kses_post( wpautop( $slide['seo_slider_content'] ) ); ?>
+				<?php do_action( 'seo_slider_before_content' ); ?>
+
+				<?php echo wp_kses_post( wpautop( $slide['seo_slider_content'] ) ); ?>
+
+				<?php do_action( 'seo_slider_after_content' ); ?>
 
 			</div>
 
+			<?php do_action( 'seo_slider_after_wrap' ); ?>
+
 		</figure>
+
+		<?php do_action( 'seo_slider_after_slide' ); ?>
 
 		<?php endforeach; ?>
 
 	</section>
+
+	<?php do_action( 'seo_slider_after_slider' ); ?>
 
 	<?php
 
