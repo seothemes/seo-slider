@@ -233,9 +233,9 @@
 .slick-wrap {
     position: relative;
     z-index: 1;
-    width: 90%;
-    max-width: calc(100% - 80px);
     margin: 0 auto;
+    width: 1152px;
+    max-width: calc(100% - 80px);
     @media (min-width: 640px) {
         max-width: calc(100% - 110px);
     }
