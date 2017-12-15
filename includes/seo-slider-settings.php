@@ -204,18 +204,18 @@ function seo_slider_register_metabox() {
 
 	// Add shortcode field.
 	$slider_settings->add_field( array(
-		'name'      => __( 'Shortcode', 'seo-slider' ),
-		'default'   => 'seo_slider_set_shortcode_id',
-		'id'        => $prefix . 'shortcode',
-		'type'      => 'text',
-		'column'    => array(
-			'position' => 2,
-			'name'     => 'Shortcode',
+		'name'       => __( 'Shortcode', 'seo-slider' ),
+		'id'         => $prefix . 'shortcode',
+		'type'       => 'text',
+		'column'     => array(
+			'position'  => 2,
+			'name'      => 'Shortcode',
 		),
-		'attributes'      => array(
-			'readonly' => '',
-			'onClick'  => 'this.select();',
+		'attributes' => array(
+			'readonly'  => '',
+			'onClick'   => 'this.select();',
 		),
+		'default_cb' => 'seo_slider_set_shortcode_id',
 	) );
 
 }
