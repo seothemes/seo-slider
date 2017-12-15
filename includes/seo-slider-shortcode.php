@@ -5,6 +5,12 @@
  * @package SEOSlider
  */
 
+ add_filter( 'seo_slider_breakpoint', 'test' );
+
+ function test() {
+	 return 900;
+ }
+
 add_shortcode( 'slider', 'seo_slider_shortcode' );
 /**
  * Add shortcode.
@@ -22,23 +28,28 @@ function seo_slider_shortcode( $atts ) {
 		$atts
 	);
 
-	$id     = $atts['id'];
-	$prefix = 'seo_slider_';
+	// Slider variables.
+	$id         = $atts['id'];
+	$prefix     = 'seo_slider_';
+	$breakpoint = apply_filters( 'seo_slider_breakpoint', 640 );
 
 	// Get slider settings.
 	$dots        = ( get_post_meta( $id, $prefix . 'dots', true ) ? 'true' : 'false' );
 	$arrows      = ( get_post_meta( $id, $prefix . 'arrows', true ) ? 'true' : 'false' );
 	$loop        = ( get_post_meta( $id, $prefix . 'loop', true ) ? 'true' : 'false' );
 	$autoplay    = ( get_post_meta( $id, $prefix . 'autoplay', true ) ? 'true' : 'false' );
+	$effect        = ( get_post_meta( $id, $prefix . 'effect', true ) === 'true' ? 'true' : 'false' );
 	$duration    = get_post_meta( $id, $prefix . 'duration', true );
 	$transition  = get_post_meta( $id, $prefix . 'transition', true );
-	$height      = get_post_meta( $id, $prefix . 'height', true );
+	$mobile      = get_post_meta( $id, $prefix . 'mobile', true );
+	$desktop     = get_post_meta( $id, $prefix . 'desktop', true );
 	$image       = get_post_meta( $id, $prefix . 'image', true );
 	$content     = get_post_meta( $id, $prefix . 'content', true );
 	$overlay     = get_post_meta( $id, $prefix . 'overlay', true );
 	$text        = get_post_meta( $id, $prefix . 'text', true );
 	$slides      = get_post_meta( $id, $prefix . 'slides', true );
 
+	// Build JS.
 	$js = "
 	jQuery( document ).ready( function($) {
 		$( '.slick-slider-$id' ).slick( {
@@ -48,37 +59,32 @@ function seo_slider_shortcode( $atts ) {
 			arrows: $arrows,
 			autoplay: $autoplay,
 			autoplaySpeed: $duration,
+			fade: $effect,
 			slidesToShow: 1	,
 			slidesToScroll: 1,
-			responsive: [
-				{
-					breakpoint: 1024,
-					settings: {
-						slidesToShow: 1,
-					}
-				},
-				{
-					breakpoint: 640,
-					settings: {
-						slidesToShow: 1,
-					}
-				}
-			]
+			lazyLoad: 'ondemand',
+			mobileFirst: true
 		} );	
 	} );
 	";
 
+	// Build CSS.
 	$css = "
+	.slick-slider-$id {
+		height: ${mobile}px;
+	}
+	.slick-slider-$id,
+	.slick-slider-$id p {
+		color: $text;
+	}
+	.slick-slider-$id .slick-overlay {
+		background-color: $overlay;
+	}
+	@media (min-width: ${breakpoint}px) {
 		.slick-slider-$id {
-			min-height: ${height}px;
+			height: ${desktop}px;
 		}
-		.slick-slider-$id,
-		.slick-slider-$id p {
-			color: $text;
-		}
-		.slick-slider-$id .slick-overlay {
-			background-color: $overlay;
-		}
+	}
 	";
 
 	if ( apply_filters( 'seo_slider_output_inline_js', true ) ) {

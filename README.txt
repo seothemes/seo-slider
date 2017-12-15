@@ -21,6 +21,7 @@ SEO Slider creates a new `slider` custom post type and provides handy options to
 * Enable arrows
 * Enable loop
 * Enable autoplay
+* Effect style
 * Slide duration
 * Slide transition
 * Slider height

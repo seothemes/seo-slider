@@ -53,7 +53,7 @@ function seo_slider_register_metabox() {
 		'id'             => $prefix . 'content',
 		'type'           => 'wysiwyg',
 		'options'        => array(
-			'textarea_rows' => get_option( 'default_post_edit_rows', 10 ),
+			'textarea_rows' => get_option( 'default_post_edit_rows', 12 ),
 		),
 	) );
 
@@ -73,7 +73,7 @@ function seo_slider_register_metabox() {
 
 	// Add overlay color field.
 	$slider_settings->add_field( array(
-		'name'    => __( 'Overlay', 'seo-slider' ),
+		'name'    => __( 'Overlay color', 'seo-slider' ),
 		'id'      => $prefix . 'overlay',
 		'type'    => 'colorpicker',
 		'default' => apply_filters( 'seo_slider_default_overlay', 'rgba(10,20,30,0.2)' ),
@@ -84,7 +84,7 @@ function seo_slider_register_metabox() {
 
 	// Add text color field.
 	$slider_settings->add_field( array(
-		'name'    => __( 'Text', 'seo-slider' ),
+		'name'    => __( 'Text color', 'seo-slider' ),
 		'id'      => $prefix . 'text',
 		'type'    => 'colorpicker',
 		'default' => apply_filters( 'seo_slider_default_text', '#ffffff' ),
@@ -137,6 +137,19 @@ function seo_slider_register_metabox() {
 		'default' => seo_slider_set_checkbox_default( true ),
 	) );
 
+	// Add fade field.
+	$slider_settings->add_field( array(
+		'name'    => 'Effect',
+		'desc'    => '',
+		'id'      => $prefix . 'effect',
+		'type'    => 'radio_inline',
+		'default' => 'slide',
+		'options'          => array(
+			'false' => __( 'Slide', 'cmb2' ),
+			'true'  => __( 'Fade', 'cmb2' ),
+		),
+	) );
+
 	// Add duration field.
 	$slider_settings->add_field( array(
 		'name'            => __( 'Duration (ms)', 'seo-slider' ),
@@ -165,9 +178,22 @@ function seo_slider_register_metabox() {
 
 	// Add height field.
 	$slider_settings->add_field( array(
-		'name'            => __( 'Min Height (px)', 'seo-slider' ),
+		'name'            => __( 'Height mobile (px)', 'seo-slider' ),
 		'desc'            => '',
-		'id'              => $prefix . 'height',
+		'id'              => $prefix . 'mobile',
+		'type'            => 'text',
+		'default'         => apply_filters( 'seo_slider_default_height', '600' ),
+		'attributes'      => array(
+			'type'    => 'number',
+			'pattern' => '\d*',
+		),
+	) );
+
+	// Add height field.
+	$slider_settings->add_field( array(
+		'name'            => __( 'Height desktop (px)', 'seo-slider' ),
+		'desc'            => '',
+		'id'              => $prefix . 'desktop',
 		'type'            => 'text',
 		'default'         => apply_filters( 'seo_slider_default_height', '600' ),
 		'attributes'      => array(
