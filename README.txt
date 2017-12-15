@@ -9,10 +9,10 @@ Stable tag: 1.0.6
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
-Displays a lightweight slider optimized for search engines.
+Displays a lightweight slider optimized for search engines, accessibility and mobile devices.
 
 == Description ==
-SEO Slider creates a new `slider` custom post type and provides handy options to create multiple sliders. This plugin is accessibility ready and mobile responsive.
+SEO Slider creates a new `slider` custom post type and provides plenty of options to create multiple sliders with either a widget or a shortcode.
 
 = Slider Settings =
 * Overlay Color

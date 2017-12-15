@@ -32,7 +32,7 @@ function seo_slider_shortcode( $atts ) {
 	$arrows      = ( get_post_meta( $id, $prefix . 'arrows', true ) ? 'true' : 'false' );
 	$loop        = ( get_post_meta( $id, $prefix . 'loop', true ) ? 'true' : 'false' );
 	$autoplay    = ( get_post_meta( $id, $prefix . 'autoplay', true ) ? 'true' : 'false' );
-	$effect        = ( get_post_meta( $id, $prefix . 'effect', true ) === 'true' ? 'true' : 'false' );
+	$effect      = ( get_post_meta( $id, $prefix . 'effect', true ) === 'true' ? 'true' : 'false' );
 	$duration    = get_post_meta( $id, $prefix . 'duration', true );
 	$transition  = get_post_meta( $id, $prefix . 'transition', true );
 	$mobile      = get_post_meta( $id, $prefix . 'mobile', true );
