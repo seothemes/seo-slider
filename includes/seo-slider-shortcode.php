@@ -5,12 +5,6 @@
  * @package SEOSlider
  */
 
- add_filter( 'seo_slider_breakpoint', 'test' );
-
- function test() {
-	 return 900;
- }
-
 add_shortcode( 'slider', 'seo_slider_shortcode' );
 /**
  * Add shortcode.
