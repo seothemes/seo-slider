@@ -29,7 +29,7 @@ SEO Slider creates a new `slider` custom post type and provides plenty of option
 ### Shortcode Usage
 Here is an example of the SEO Slider shortcode. The slider ID can be found from the Edit Slider screen:
 
-`[slider is="1234"]`
+`[slider id="1234"]`
 
 ## Installation
 1. Go to Plugins > Add New.

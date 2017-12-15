@@ -68,7 +68,14 @@ function seo_slider_shortcode( $atts ) {
 		height: ${mobile}px;
 	}
 	.slick-slider-$id,
-	.slick-slider-$id p {
+	.slick-slider-$id p,
+	.slick-slider-$id h1,
+	.slick-slider-$id h2,
+	.slick-slider-$id h3,
+	.slick-slider-$id h4,
+	.slick-slider-$id h5,
+	.slick-slider-$id h6,
+	.slick-slider-$id li {
 		color: $text;
 	}
 	.slick-slider-$id .slick-overlay {
