@@ -43,6 +43,9 @@ require_once( 'includes/seo-slider-shortcode.php' );
 // Load slider widget.
 require_once( 'includes/seo-slider-widget.php' );
 
+// Add custom image size.
+add_image_size( 'slider', 1280, 720, true );
+
 add_action( 'admin_enqueue_scripts', 'seo_slider_admin_scripts_styles', 100 );
 /**
  * Load admin scripts and styles.

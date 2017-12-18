@@ -113,13 +113,14 @@ function seo_slider_shortcode( $atts ) {
 		<figure class="slick-slide" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
 
 			<?php
-			$img_args = apply_filters( 'seo_slider_image_args', array(
+			$img_size = apply_filters( 'seo_slider_image_size', 'slider' );
+			$img_atts = apply_filters( 'seo_slider_image_args', array(
 				'class'    => 'slick-image',
 				'itemprop' => 'image',
 			) );
 			?>
 
-			<?php echo wp_get_attachment_image( $slide['seo_slider_image_id'], 'full', false, $img_args ); ?>
+			<?php echo wp_get_attachment_image( $slide['seo_slider_image_id'], $img_size, false, $img_atts ); ?>
 
 			<div class="slick-overlay"></div>
 
