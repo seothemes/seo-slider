@@ -114,7 +114,6 @@
 }
 
 .slick-slide {
-    min-height: 600px;
     position: relative;
     background-position: center;
     background-size: cover;
@@ -125,6 +124,16 @@
         width: auto;
         max-height: none;
         max-width: none;
+    }
+    .slick-image {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+        position: absolute;
+        .no-object-fit & {
+            display: none;
+        }
     }
 }
 
@@ -251,15 +260,4 @@
     right: 0;
     bottom: 0;
     z-index: 0;
-}
-
-.slick-image {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    object-position: center;
-    position: absolute;
-    .no-object-fit & {
-        display: none;
-    }
 }
