@@ -1,4 +1,50 @@
 <?php
+/**
+ * The initation loader for CMB2, and the main plugin file.
+ *
+ * @category     WordPress_Plugin
+ * @package      CMB2
+ * @author       CMB2 team
+ * @license      GPL-2.0+
+ * @link         https://cmb2.io
+ *
+ * Plugin Name:  CMB2
+ * Plugin URI:   https://github.com/CMB2/CMB2
+ * Description:  CMB2 will create metaboxes and forms with custom fields that will blow your mind.
+ * Author:       CMB2 team
+ * Author URI:   https://cmb2.io
+ * Contributors: Justin Sternberg (@jtsternberg / dsgnwrks.pro)
+ *               WebDevStudios (@webdevstudios / webdevstudios.com)
+ *               Zao (zao.is)
+ *               Human Made (@humanmadeltd / hmn.md)
+ *               Jared Atchison (@jaredatch / jaredatchison.com)
+ *               Bill Erickson (@billerickson / billerickson.net)
+ *               Andrew Norcross (@norcross / andrewnorcross.com)
+ *
+ * Version:      2.3.0
+ *
+ * Text Domain:  cmb2
+ * Domain Path:  languages
+ *
+ *
+ * Released under the GPL license
+ * http://www.opensource.org/licenses/gpl-license.php
+ *
+ * This is an add-on for WordPress
+ * https://wordpress.org/
+ *
+ * **********************************************************************
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * **********************************************************************
+ */
 
 /**
  * *********************************************************************
@@ -8,7 +54,7 @@
  * ***********************************************************************
  */
 
-if ( ! class_exists( 'CMB2_Bootstrap_227_Trunk', false ) ) {
+if ( ! class_exists( 'CMB2_Bootstrap_230_Trunk', false ) ) {
 
 	/**
 	 * Handles checking for and loading the newest version of CMB2
@@ -21,7 +67,7 @@ if ( ! class_exists( 'CMB2_Bootstrap_227_Trunk', false ) ) {
 	 * @license   GPL-2.0+
 	 * @link      https://cmb2.io
 	 */
-	class CMB2_Bootstrap_227_Trunk {
+	class CMB2_Bootstrap_230_Trunk {
 
 		/**
 		 * Current version number
@@ -29,7 +75,7 @@ if ( ! class_exists( 'CMB2_Bootstrap_227_Trunk', false ) ) {
 		 * @var   string
 		 * @since 1.0.0
 		 */
-		const VERSION = '2.2.6.2';
+		const VERSION = '2.3.0';
 
 		/**
 		 * Current version hook priority.
@@ -38,20 +84,20 @@ if ( ! class_exists( 'CMB2_Bootstrap_227_Trunk', false ) ) {
 		 * @var   int
 		 * @since 2.0.0
 		 */
-		const PRIORITY = 9970;
+		const PRIORITY = 9969;
 
 		/**
-		 * Single instance of the CMB2_Bootstrap_227_Trunk object
+		 * Single instance of the CMB2_Bootstrap_230_Trunk object
 		 *
-		 * @var CMB2_Bootstrap_227_Trunk
+		 * @var CMB2_Bootstrap_230_Trunk
 		 */
 		public static $single_instance = null;
 
 		/**
-		 * Creates/returns the single instance CMB2_Bootstrap_227_Trunk object
+		 * Creates/returns the single instance CMB2_Bootstrap_230_Trunk object
 		 *
 		 * @since  2.0.0
-		 * @return CMB2_Bootstrap_227_Trunk Single instance object
+		 * @return CMB2_Bootstrap_230_Trunk Single instance object
 		 */
 		public static function initiate() {
 			if ( null === self::$single_instance ) {
@@ -143,6 +189,6 @@ if ( ! class_exists( 'CMB2_Bootstrap_227_Trunk', false ) ) {
 	}
 
 	// Make it so...
-	CMB2_Bootstrap_227_Trunk::initiate();
+	CMB2_Bootstrap_230_Trunk::initiate();
 
 }// End if().

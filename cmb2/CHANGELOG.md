@@ -5,10 +5,18 @@ All notable changes to this project will be documented in this file.
 
 ### Enhancements
 
-* With 2.3.0, will be fully switching to the more communicative and standard [Semantic Versioning](https://semver.org/). ([#1061](https://github.com/CMB2/CMB2/issues/1061)).
+* Enable linking options pages via tabbed-navigation. Will output tabbed navigation for options-pages which share the same `'tab_group'` CMB2 box property. [This snippet](https://github.com/CMB2/CMB2-Snippet-Library/blob/master/options-and-settings-pages/options-pages-with-tabs-and-submenus.php) demonstrates how to create a top-level menu options page with multiple submenu pages, each with the tabbed navigation. To specify a different tab title than the options-page title, set the `'tab_title'` CMB2 box property. See [#301](https://github.com/CMB2/CMB2/issues/301), [#627](https://github.com/CMB2/CMB2/issues/627).
+
+## [2.3.0 - 2017-12-20](https://github.com/CMB2/CMB2/releases/tag/v2.3.0)
+
+### Enhancements
+
 * Updated Italian translation. Props [@Mte90](https://github.com/Mte90) ([#1067](https://github.com/CMB2/CMB2/issues/1067)).
+* Starting with this release, we are fully switching to the more communicative and standard [Semantic Versioning](https://semver.org/). ([#1061](https://github.com/CMB2/CMB2/issues/1061)).
 
 ### Bug Fixes
+
+* Update for compatibility with PHP 7.2 (e.g. fixes `Fatal error: Declaration of CMB2_Type_Colorpicker::render() must be compatible with CMB2_Type_Text::render($args = Array)...`). ([#1070](https://github.com/CMB2/CMB2/issues/1070), [#1074](https://github.com/CMB2/CMB2/issues/1074), [#1075](https://github.com/CMB2/CMB2/issues/1075)).
 
 ## [2.2.6.2 - 2017-11-24](https://github.com/CMB2/CMB2/releases/tag/v2.2.6.2)
 
