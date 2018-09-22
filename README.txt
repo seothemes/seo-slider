@@ -2,9 +2,9 @@
 Contributors: seothemes
 Tags: slider
 Donate link: https://seothemes.com
-Requires at least: 4.8.1
-Tested up to: 4.9.1
-Requires PHP: 5.6
+Requires at least: 4.9
+Tested up to: 4.9.8
+Requires PHP: 5.3
 Stable tag: trunk
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
