@@ -2,10 +2,10 @@
 /**
  * Plugin Name: SEO Slider
  * Plugin URI:  https://seothemes.com/plugins/seo-slider
- * Description: A search engined optimized, accessibility ready and mobile responsive slider plugin.
+ * Description: A simple and lightweight, search engined optimized, accessible and mobile responsive slider plugin.
  * Author:      SEO Themes
  * Author URI:  https://seothemes.com
- * Version:     1.0.2
+ * Version:     1.0.3
  * Text Domain: seo-slider
  * Domain Path: /languages
  * License:     GNU General Public License v2.0 (or later)

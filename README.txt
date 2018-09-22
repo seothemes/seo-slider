@@ -53,6 +53,11 @@ This plugin uses the Slick Slider JavaScript plugin which supports keyboard arro
 
 == Changelog ==
 
+= 1.0.3 =
+* Enable shortcodes in slide content
+* Add filter for wysiwyg sanitization callback
+* Remove cmb2 plugin header comment
+
 = 1.0.2 =
 * Update CMB2 to version 2.3.0
 
