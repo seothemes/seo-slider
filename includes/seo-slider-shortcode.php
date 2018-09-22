@@ -89,15 +89,11 @@ function seo_slider_shortcode( $atts ) {
 	";
 
 	if ( apply_filters( 'seo_slider_output_inline_js', true ) ) {
-
 		printf( '<script>%s</script>', seo_slider_minify_js( $js ) );
-
 	}
 
 	if ( apply_filters( 'seo_slider_output_inline_css', true ) ) {
-
 		printf( '<style>%s</style>', seo_slider_minify_css( $css ) );
-
 	}
 
 	?>
@@ -120,7 +116,9 @@ function seo_slider_shortcode( $atts ) {
 			) );
 			?>
 
-			<?php echo wp_get_attachment_image( $slide['seo_slider_image_id'], $img_size, false, $img_atts ); ?>
+			<?php if ( isset( $slide['seo_slider_image_id'] ) ) :
+				echo wp_get_attachment_image( $slide['seo_slider_image_id'], $img_size, false, $img_atts );
+			endif; ?>
 
 			<div class="slick-overlay"></div>
 
@@ -132,7 +130,9 @@ function seo_slider_shortcode( $atts ) {
 
 				<div class="slick-content" itemprop="description">
 
-				<?php echo wp_kses_post( wpautop( $slide['seo_slider_content'] ) ); ?>
+				<?php if ( isset( $slide['seo_slider_content'] ) ) :
+					echo do_shortcode( wp_kses_post( wpautop( $slide['seo_slider_content'] ) ) );
+				endif; ?>
 
 				</div>
 
