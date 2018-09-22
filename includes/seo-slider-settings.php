@@ -49,12 +49,13 @@ function seo_slider_register_metabox() {
 
 	// Add content field to slides repeater field.
 	$slides_group->add_group_field( $group_field_id, array(
-		'name'           => __( 'Content', 'seo-slider' ),
-		'id'             => $prefix . 'content',
-		'type'           => 'wysiwyg',
-		'options'        => array(
+		'name'            => __( 'Content', 'seo-slider' ),
+		'id'              => $prefix . 'content',
+		'type'            => 'wysiwyg',
+		'options'         => array(
 			'textarea_rows' => get_option( 'default_post_edit_rows', 12 ),
 		),
+		'sanitization_cb' => apply_filters( 'seo_slider_wysiwyg_sanitization', 'wp_kses_post' ),
 	) );
 
 	/**
@@ -63,12 +64,12 @@ function seo_slider_register_metabox() {
 	 * Displays in the side context of the Edit Slider screen.
 	 */
 	$slider_settings = new_cmb2_box( array(
-		'id'            => $prefix . 'settings',
-		'title'         => __( 'Slider Settings', 'seo-slider' ),
-		'object_types'  => array( 'slide' ),
-		'context'       => 'side',
-		'priority'      => 'default',
-		'show_names'    => true,
+		'id'           => $prefix . 'settings',
+		'title'        => __( 'Slider Settings', 'seo-slider' ),
+		'object_types' => array( 'slide' ),
+		'context'      => 'side',
+		'priority'     => 'default',
+		'show_names'   => true,
 	) );
 
 	// Add overlay color field.
@@ -144,7 +145,7 @@ function seo_slider_register_metabox() {
 		'id'      => $prefix . 'effect',
 		'type'    => 'radio_inline',
 		'default' => 'slide',
-		'options'          => array(
+		'options' => array(
 			'false' => __( 'Slide', 'cmb2' ),
 			'true'  => __( 'Fade', 'cmb2' ),
 		),
@@ -152,12 +153,12 @@ function seo_slider_register_metabox() {
 
 	// Add duration field.
 	$slider_settings->add_field( array(
-		'name'            => __( 'Duration (ms)', 'seo-slider' ),
-		'desc'            => '',
-		'id'              => $prefix . 'duration',
-		'type'            => 'text',
-		'default'         => apply_filters( 'seo_slider_default_duration', '5000' ),
-		'attributes'      => array(
+		'name'       => __( 'Duration (ms)', 'seo-slider' ),
+		'desc'       => '',
+		'id'         => $prefix . 'duration',
+		'type'       => 'text',
+		'default'    => apply_filters( 'seo_slider_default_duration', '5000' ),
+		'attributes' => array(
 			'type'    => 'number',
 			'pattern' => '\d*',
 		),
@@ -165,12 +166,12 @@ function seo_slider_register_metabox() {
 
 	// Add transition field.
 	$slider_settings->add_field( array(
-		'name'            => __( 'Transition (ms)', 'seo-slider' ),
-		'desc'            => '',
-		'id'              => $prefix . 'transition',
-		'type'            => 'text',
-		'default'         => apply_filters( 'seo_slider_default_transition', '1000' ),
-		'attributes'      => array(
+		'name'       => __( 'Transition (ms)', 'seo-slider' ),
+		'desc'       => '',
+		'id'         => $prefix . 'transition',
+		'type'       => 'text',
+		'default'    => apply_filters( 'seo_slider_default_transition', '1000' ),
+		'attributes' => array(
 			'type'    => 'number',
 			'pattern' => '\d*',
 		),
@@ -178,12 +179,12 @@ function seo_slider_register_metabox() {
 
 	// Add height field.
 	$slider_settings->add_field( array(
-		'name'            => __( 'Height mobile (px)', 'seo-slider' ),
-		'desc'            => '',
-		'id'              => $prefix . 'mobile',
-		'type'            => 'text',
-		'default'         => apply_filters( 'seo_slider_default_height', '600' ),
-		'attributes'      => array(
+		'name'       => __( 'Height mobile (px)', 'seo-slider' ),
+		'desc'       => '',
+		'id'         => $prefix . 'mobile',
+		'type'       => 'text',
+		'default'    => apply_filters( 'seo_slider_default_height', '600' ),
+		'attributes' => array(
 			'type'    => 'number',
 			'pattern' => '\d*',
 		),
@@ -191,12 +192,12 @@ function seo_slider_register_metabox() {
 
 	// Add height field.
 	$slider_settings->add_field( array(
-		'name'            => __( 'Height desktop (px)', 'seo-slider' ),
-		'desc'            => '',
-		'id'              => $prefix . 'desktop',
-		'type'            => 'text',
-		'default'         => apply_filters( 'seo_slider_default_height', '600' ),
-		'attributes'      => array(
+		'name'       => __( 'Height desktop (px)', 'seo-slider' ),
+		'desc'       => '',
+		'id'         => $prefix . 'desktop',
+		'type'       => 'text',
+		'default'    => apply_filters( 'seo_slider_default_height', '600' ),
+		'attributes' => array(
 			'type'    => 'number',
 			'pattern' => '\d*',
 		),
@@ -208,12 +209,12 @@ function seo_slider_register_metabox() {
 		'id'         => $prefix . 'shortcode',
 		'type'       => 'text',
 		'column'     => array(
-			'position'  => 2,
-			'name'      => 'Shortcode',
+			'position' => 2,
+			'name'     => 'Shortcode',
 		),
 		'attributes' => array(
-			'readonly'  => '',
-			'onClick'   => 'this.select();',
+			'readonly' => '',
+			'onClick'  => 'this.select();',
 		),
 		'default_cb' => 'seo_slider_set_shortcode_id',
 	) );
