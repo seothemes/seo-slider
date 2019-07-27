@@ -5,7 +5,7 @@
  * Description: A simple and lightweight, search engined optimized, accessible and mobile responsive slider plugin.
  * Author:      SEO Themes
  * Author URI:  https://seothemes.com
- * Version:     1.0.3
+ * Version:     1.0.5
  * Text Domain: seo-slider
  * Domain Path: /languages
  * License:     GNU General Public License v2.0 (or later)
@@ -20,57 +20,32 @@
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
-
 	die;
-
 }
 
+// Define constants.
+define( 'SEO_SLIDER_FILE', __FILE__ );
+
 // Load CMB2 library.
-require_once( 'cmb2/init.php' );
+require_once 'cmb2/init.php';
 
 // Load slider helper functions.
-require_once( 'includes/seo-slider-helpers.php' );
+require_once 'includes/seo-slider-helpers.php';
 
 // Load slider metabox settings.
-require_once( 'includes/seo-slider-settings.php' );
+require_once 'includes/seo-slider-settings.php';
 
 // Load slider custom post type.
-require_once( 'includes/seo-slider-cpt.php' );
+require_once 'includes/seo-slider-cpt.php';
 
 // Load slider shortcode.
-require_once( 'includes/seo-slider-shortcode.php' );
+require_once 'includes/seo-slider-shortcode.php';
 
 // Load slider widget.
-require_once( 'includes/seo-slider-widget.php' );
+require_once 'includes/seo-slider-widget.php';
+
+// Load plugin assets.
+require_once 'includes/seo-slider-assets.php';
 
 // Add custom image size.
 add_image_size( 'slider', 1280, 720, true );
-
-add_action( 'admin_enqueue_scripts', 'seo_slider_admin_scripts_styles', 100 );
-/**
- * Load admin scripts and styles.
- */
-function seo_slider_admin_scripts_styles() {
-
-	if ( get_current_screen()->id === 'slide' || get_current_screen()->id === 'edit-slide' ) {
-
-		// Enqueue admin CSS.
-		wp_enqueue_style( 'seo-slider-admin', plugin_dir_url( __FILE__ ) . 'assets/styles/admin.css' );
-
-	}
-
-}
-
-add_action( 'wp_enqueue_scripts', 'seo_slider_scripts_styles' );
-/**
- * Load frontend scripts and styles.
- */
-function seo_slider_scripts_styles() {
-
-	// Enqueue frontend CSS.
-	wp_enqueue_style( 'seo-slider', plugin_dir_url( __FILE__ ) . 'assets/styles/styles.min.css' );
-
-	// Enqueue frontend JS.
-	wp_enqueue_script( 'seo-slider', plugin_dir_url( __FILE__ ) . 'assets/scripts/scripts.min.js', array( 'jquery' ) );
-
-}

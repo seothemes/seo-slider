@@ -3,8 +3,8 @@ Contributors: seothemes
 Tags: slider
 Donate link: https://seothemes.com
 Requires at least: 4.9
-Tested up to: 4.9.8
-Requires PHP: 5.3
+Tested up to: 5.2.2
+Requires PHP: 5.4
 Stable tag: trunk
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -52,6 +52,13 @@ SEO Slider has been built with SEO in mind. We've taken extra care to ensure tha
 This plugin uses the Slick Slider JavaScript plugin which supports keyboard arrow key navigation. Give it a try yourself at https://demo.seothemes.com/corporate-pro/ using just the keyboard to navigate through the slides.
 
 == Changelog ==
+
+= 1.0.5 =
+* Fix missing assets
+
+= 1.0.4 =
+* Fix compatibility with Gutenberg
+* Remove schema if Yoast is active
 
 = 1.0.3 =
 * Enable shortcodes in slide content
