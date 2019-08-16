@@ -6,8 +6,8 @@ Requires at least: 4.9
 Tested up to: 5.2.2
 Requires PHP: 5.4
 Stable tag: trunk
-License: GPL-2.0+
-License URI: http://www.gnu.org/licenses/gpl-2.0.txt
+License: GPL-3.0-or-later
+License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
 Displays a lightweight slider optimized for search engines, accessibility and mobile devices.
 
@@ -52,6 +52,9 @@ SEO Slider has been built with SEO in mind. We've taken extra care to ensure tha
 This plugin uses the Slick Slider JavaScript plugin which supports keyboard arrow key navigation. Give it a try yourself at https://demo.seothemes.com/corporate-pro/ using just the keyboard to navigate through the slides.
 
 == Changelog ==
+
+= 1.0.6 =
+* Add unique classes to slides
 
 = 1.0.5 =
 * Fix missing assets

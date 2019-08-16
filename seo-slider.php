@@ -5,17 +5,16 @@
  * Description: A simple and lightweight, search engined optimized, accessible and mobile responsive slider plugin.
  * Author:      SEO Themes
  * Author URI:  https://seothemes.com
- * Version:     1.0.5
+ * Version:     1.0.6
  * Text Domain: seo-slider
  * Domain Path: /languages
- * License:     GNU General Public License v2.0 (or later)
+ * License:     GPL-3.0-or-later
  * License URI: http://www.opensource.org/licenses/gpl-license.php
  *
  * @package     SEOSlider
  * @link        https://seothemes.com/plugins/seo-slider
  * @author      Seo Themes
- * @copyright   Copyright © 2017 Seo Themes
- * @license     GPL-2.0+
+ * @copyright   Copyright © 2019 Seo Themes
  */
 
 // If this file is called directly, abort.

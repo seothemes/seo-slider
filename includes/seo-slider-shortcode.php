@@ -127,11 +127,13 @@ function seo_slider_shortcode( $atts ) {
 
 	<section class="slick-slider slick-slider-<?php echo esc_attr( $id ); ?>" role="banner"<?php echo $schema['gallery']; ?>>
 
+		<?php $slide_id = 1; ?>
+
 		<?php foreach ( $slides as $slide ) : ?>
 
 			<?php do_action( 'seo_slider_before_slide' ); ?>
 
-			<figure class="slick-slide"<?php echo $schema['object']; ?>>
+			<figure class="slick-slide slick-slide-<?php esc_attr_e( $slide_id++ ); ?>"<?php echo $schema['object']; ?>>
 
 				<?php
 				$img_size = apply_filters( 'seo_slider_image_size', 'slider' );

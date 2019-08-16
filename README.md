@@ -5,9 +5,9 @@
 * Requires at least: 4.9
 * Tested up to: 5.2.2
 * Requires PHP: 5.4
-* Stable tag: 1.0.4
-* License: GPL-2.0+
-* License URI: http://www.gnu.org/licenses/gpl-2.0.txt
+* Stable tag: trunk
+* License: GPL-3.0-or-later
+* License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
 Displays a lightweight slider optimized for search engines, accessibility and mobile devices.
 
@@ -47,8 +47,3 @@ Yes.
 
 ### Is this plugin accessibility ready?
 Yes.
-
-## Changelog
-
-### 1.0.0
-* Initial release.
