@@ -53,6 +53,9 @@ This plugin uses the Slick Slider JavaScript plugin which supports keyboard arro
 
 == Changelog ==
 
+= 1.0.7 =
+* Add extra args to hooks and filters
+
 = 1.0.6 =
 * Add unique classes to slides
 
