@@ -122,7 +122,7 @@ function seo_slider_shortcode( $atts ) {
 
 	ob_start();
 
-	do_action( 'seo_slider_before_slider' );
+	do_action( 'seo_slider_before_slider', $id );
 	?>
 
 	<section class="slick-slider slick-slider-<?php echo esc_attr( $id ); ?>" role="banner"<?php echo $schema['gallery']; ?>>
@@ -131,26 +131,28 @@ function seo_slider_shortcode( $atts ) {
 
 		<?php foreach ( $slides as $slide ) : ?>
 
-			<?php do_action( 'seo_slider_before_slide' ); ?>
+			<?php do_action( 'seo_slider_before_slide', $slide ); ?>
 
 			<figure class="slick-slide slick-slide-<?php esc_attr_e( $slide_id++ ); ?>"<?php echo $schema['object']; ?>>
 
 				<?php
+				$img_id   = $slide['seo_slider_image_id'];
 				$img_size = apply_filters( 'seo_slider_image_size', 'slider' );
 				$img_atts = apply_filters( 'seo_slider_image_args', $schema['image'] );
+				$img_html = wp_get_attachment_image( $img_id, $img_size, false, $img_atts );
 				?>
 
 				<?php if ( isset( $slide['seo_slider_image_id'] ) ) :
-					echo wp_get_attachment_image( $slide['seo_slider_image_id'], $img_size, false, $img_atts );
+					echo apply_filters( 'seo_slider_image_output', $img_html, $img_id, $img_size, $img_atts );
 				endif; ?>
 
 				<div class="slick-overlay"></div>
 
-				<?php do_action( 'seo_slider_before_wrap' ); ?>
+				<?php do_action( 'seo_slider_before_wrap', $slide ); ?>
 
 				<div class="slick-wrap">
 
-					<?php do_action( 'seo_slider_before_content' ); ?>
+					<?php do_action( 'seo_slider_before_content', $slide ); ?>
 
 					<div class="slick-content"<?php echo $schema['content']; ?>>
 
@@ -160,15 +162,15 @@ function seo_slider_shortcode( $atts ) {
 
 					</div>
 
-					<?php do_action( 'seo_slider_after_content' ); ?>
+					<?php do_action( 'seo_slider_after_content', $slide ); ?>
 
 				</div>
 
-				<?php do_action( 'seo_slider_after_wrap' ); ?>
+				<?php do_action( 'seo_slider_after_wrap', $slide ); ?>
 
 			</figure>
 
-			<?php do_action( 'seo_slider_after_slide' ); ?>
+			<?php do_action( 'seo_slider_after_slide', $slide ); ?>
 
 		<?php endforeach; ?>
 
@@ -176,7 +178,7 @@ function seo_slider_shortcode( $atts ) {
 
 	<?php
 
-	do_action( 'seo_slider_after_slider' );
+	do_action( 'seo_slider_after_slider', $id );
 
 	$output .= ob_get_clean();
 
