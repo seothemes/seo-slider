@@ -5,10 +5,10 @@
  * Description: A simple and lightweight, search engined optimized, accessible and mobile responsive slider plugin.
  * Author:      SEO Themes
  * Author URI:  https://seothemes.com
- * Version:     1.0.7
+ * Version:     1.0.8
  * Text Domain: seo-slider
- * Domain Path: /languages
- * License:     GPL-3.0-or-later
+ * Domain Path: /assets/lang
+ * License:     GPL-2.0-or-later
  * License URI: http://www.opensource.org/licenses/gpl-license.php
  *
  * @package     SEOSlider
@@ -48,3 +48,8 @@ require_once 'includes/seo-slider-assets.php';
 
 // Add custom image size.
 add_image_size( 'slider', 1280, 720, true );
+
+// Register the widget.
+add_action( 'widgets_init', function () {
+	register_widget( 'SEO_Slider_Widget' );
+} );

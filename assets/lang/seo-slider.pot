@@ -1,0 +1,215 @@
+# Copyright (C) 2019 SEO Themes
+# This file is distributed under the same license as the SEO Slider plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: SEO Slider 1.0.8\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/seo-slider\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2019-10-01T08:49:14+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.1.0\n"
+"X-Domain: seo-slider\n"
+
+#. Plugin Name of the plugin
+msgid "SEO Slider"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://seothemes.com/plugins/seo-slider"
+msgstr ""
+
+#. Description of the plugin
+msgid "A simple and lightweight, search engined optimized, accessible and mobile responsive slider plugin."
+msgstr ""
+
+#. Author of the plugin
+msgid "SEO Themes"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://seothemes.com"
+msgstr ""
+
+#: includes/seo-slider-widget.php:22
+msgid "Displays a slider in a widget."
+msgstr ""
+
+#: includes/seo-slider-widget.php:62
+#: includes/seo-slider-cpt.php:17
+#: includes/seo-slider-cpt.php:43
+msgid "Slider"
+msgstr ""
+
+#: includes/seo-slider-widget.php:70
+msgid "Select Slider:"
+msgstr ""
+
+#: includes/seo-slider-settings.php:25
+msgid "Slides"
+msgstr ""
+
+#: includes/seo-slider-settings.php:35
+msgid "Slide {#}"
+msgstr ""
+
+#: includes/seo-slider-settings.php:36
+msgid "Add Slide"
+msgstr ""
+
+#: includes/seo-slider-settings.php:37
+msgid "Remove Slide"
+msgstr ""
+
+#: includes/seo-slider-settings.php:44
+msgid "Image"
+msgstr ""
+
+#: includes/seo-slider-settings.php:52
+msgid "Content"
+msgstr ""
+
+#: includes/seo-slider-settings.php:68
+msgid "Slider Settings"
+msgstr ""
+
+#: includes/seo-slider-settings.php:77
+msgid "Overlay color"
+msgstr ""
+
+#: includes/seo-slider-settings.php:88
+msgid "Text color"
+msgstr ""
+
+#: includes/seo-slider-settings.php:156
+msgid "Duration (ms)"
+msgstr ""
+
+#: includes/seo-slider-settings.php:169
+msgid "Transition (ms)"
+msgstr ""
+
+#: includes/seo-slider-settings.php:182
+msgid "Height mobile (px)"
+msgstr ""
+
+#: includes/seo-slider-settings.php:195
+msgid "Height desktop (px)"
+msgstr ""
+
+#: includes/seo-slider-settings.php:208
+msgid "Shortcode"
+msgstr ""
+
+#: includes/seo-slider-cpt.php:14
+msgctxt "Slider General Name"
+msgid "Sliders"
+msgstr ""
+
+#: includes/seo-slider-cpt.php:15
+msgctxt "Slider Singular Name"
+msgid "Slider"
+msgstr ""
+
+#: includes/seo-slider-cpt.php:16
+msgid "Sliders"
+msgstr ""
+
+#: includes/seo-slider-cpt.php:18
+msgid "Slider Archives"
+msgstr ""
+
+#: includes/seo-slider-cpt.php:19
+msgid "Slider Attributes"
+msgstr ""
+
+#: includes/seo-slider-cpt.php:20
+msgid "Parent Slider:"
+msgstr ""
+
+#: includes/seo-slider-cpt.php:21
+msgid "All Sliders"
+msgstr ""
+
+#: includes/seo-slider-cpt.php:22
+msgid "Add New Slider"
+msgstr ""
+
+#: includes/seo-slider-cpt.php:23
+msgid "Add New"
+msgstr ""
+
+#: includes/seo-slider-cpt.php:24
+msgid "New Slider"
+msgstr ""
+
+#: includes/seo-slider-cpt.php:25
+msgid "Edit Slider"
+msgstr ""
+
+#: includes/seo-slider-cpt.php:26
+msgid "Update Slider"
+msgstr ""
+
+#: includes/seo-slider-cpt.php:27
+msgid "View Slider"
+msgstr ""
+
+#: includes/seo-slider-cpt.php:28
+msgid "View Sliders"
+msgstr ""
+
+#: includes/seo-slider-cpt.php:29
+msgid "Search Slider"
+msgstr ""
+
+#: includes/seo-slider-cpt.php:30
+msgid "Not found"
+msgstr ""
+
+#: includes/seo-slider-cpt.php:31
+msgid "Not found in Trash"
+msgstr ""
+
+#: includes/seo-slider-cpt.php:32
+msgid "Featured Image"
+msgstr ""
+
+#: includes/seo-slider-cpt.php:33
+msgid "Set featured image"
+msgstr ""
+
+#: includes/seo-slider-cpt.php:34
+msgid "Remove featured image"
+msgstr ""
+
+#: includes/seo-slider-cpt.php:35
+msgid "Use as featured image"
+msgstr ""
+
+#: includes/seo-slider-cpt.php:36
+msgid "Insert into slide"
+msgstr ""
+
+#: includes/seo-slider-cpt.php:37
+msgid "Uploaded to this slide"
+msgstr ""
+
+#: includes/seo-slider-cpt.php:38
+msgid "Sliders list"
+msgstr ""
+
+#: includes/seo-slider-cpt.php:39
+msgid "Sliders list navigation"
+msgstr ""
+
+#: includes/seo-slider-cpt.php:40
+msgid "Filter slides list"
+msgstr ""
+
+#: includes/seo-slider-cpt.php:44
+msgid "Slider Description"
+msgstr ""

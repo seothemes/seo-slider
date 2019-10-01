@@ -6,8 +6,8 @@
 * Tested up to: 5.2.2
 * Requires PHP: 5.4
 * Stable tag: trunk
-* License: GPL-3.0-or-later
-* License URI: http://www.gnu.org/licenses/gpl-3.0.txt
+* License: GPL-2.0-or-later
+* License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
 Displays a lightweight slider optimized for search engines, accessibility and mobile devices.
 

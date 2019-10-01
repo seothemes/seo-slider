@@ -1,6 +1,6 @@
 {
   "name": "seo-slider",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Displays a lightweight slider optimized for search engines, accessibility and mobile devices.",
   "main": "index.js",
   "scripts": {

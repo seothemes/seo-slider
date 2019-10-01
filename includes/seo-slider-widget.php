@@ -17,10 +17,10 @@ class SEO_Slider_Widget extends WP_Widget {
 	 */
 	public function __construct() {
 
-		$widget_ops = array(
+		$widget_ops = [
 			'classname'   => 'seo_slider_widget',
-			'description' => 'Displays a slider in a widget.',
-		);
+			'description' => __( 'Displays a slider in a widget.', 'seo-slider' ),
+		];
 
 		parent::__construct( 'seo_slider_widget', 'Slider', $widget_ops );
 	}
@@ -30,29 +30,36 @@ class SEO_Slider_Widget extends WP_Widget {
 	 *
 	 * @param  array $args     Widget args.
 	 * @param  array $instance Widget instance.
+	 *
 	 * @return void
 	 */
 	public function widget( $args, $instance ) {
 
-		$id = get_page_by_title( $instance['slider'], OBJECT, 'slide' )->ID;
+		if ( ! isset( $instance['slider'] ) ) {
+			return;
+		}
 
 		echo $args['before_widget'];
 
-		echo do_shortcode( '[slider id="' . absint( $id ) . '"]' );
+		$id = get_page_by_title( $instance['slider'], OBJECT, 'slide' )->ID;
+
+		if ( $id ) {
+			echo do_shortcode( '[slider id="' . absint( $id ) . '"]' );
+		}
 
 		echo $args['after_widget'];
-
 	}
 
 	/**
 	 * Outputs the options form on admin.
 	 *
 	 * @param  array $instance The widget options.
+	 *
 	 * @return void
 	 */
 	public function form( $instance ) {
 
-		$title = ! empty( $instance['title'] ) ? $instance['title'] : __( 'Slider', 'seo-slider' );
+		$title = isset( $instance['title'] ) ? $instance['title'] : __( 'Slider', 'seo-slider' );
 
 		?>
 		<p>
@@ -62,22 +69,27 @@ class SEO_Slider_Widget extends WP_Widget {
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'slider' ) ); ?>"><?php esc_html_e( 'Select Slider:', 'seo-slider' ); ?></label>
 			<select name="<?php echo esc_attr( $this->get_field_name( 'slider' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'slider' ) ); ?>" class="widefat">
-			<?php
-			$slides = new WP_Query( array(
-				'post_type'   => 'slide',
-				'numberposts' => 99,
-			) );
+				<?php
+				$slides = new WP_Query( [
+					'post_type'   => 'slide',
+					'numberposts' => 99,
+				] );
 
-			while ( $slides->have_posts() ) :
+				while ( $slides->have_posts() ) :
 
-				$slides->the_post();
+					$slides->the_post();
+					$name = get_the_title();
 
-				$name = get_the_title();
+					printf(
+						'<option value="%s" id="%s" %s>%s</option>',
+						esc_attr( $name ),
+						esc_attr( $name ),
+						isset( $instance['slider'] ) && $instance['slider'] === $name ? ' selected="selected"' : '',
+						esc_html( $name )
+					);
 
-				echo '<option value="' . esc_attr( $name ) . '" id="' . esc_attr( $name ) . '"', $instance['slider'] === $name ? ' selected="selected"' : '', '>', esc_html( $name ), '</option>';
-
-			endwhile;
-			?>
+				endwhile;
+				?>
 			</select>
 		</p>
 		<?php
@@ -88,6 +100,7 @@ class SEO_Slider_Widget extends WP_Widget {
 	 *
 	 * @param  array $new_instance The new options.
 	 * @param  array $old_instance The previous options.
+	 *
 	 * @return array
 	 */
 	public function update( $new_instance, $old_instance ) {
@@ -99,14 +112,5 @@ class SEO_Slider_Widget extends WP_Widget {
 		}
 
 		return $updated_instance;
-
 	}
-
 }
-
-// Register the widget.
-add_action( 'widgets_init', function() {
-
-	register_widget( 'SEO_Slider_Widget' );
-
-} );

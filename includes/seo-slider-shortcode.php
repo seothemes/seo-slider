@@ -136,7 +136,7 @@ function seo_slider_shortcode( $atts ) {
 			<figure class="slick-slide slick-slide-<?php esc_attr_e( $slide_id++ ); ?>"<?php echo $schema['object']; ?>>
 
 				<?php
-				$img_id   = $slide['seo_slider_image_id'];
+				$img_id   = isset( $slide['seo_slider_image_id'] ) ? $slide['seo_slider_image_id'] : false;
 				$img_size = apply_filters( 'seo_slider_image_size', 'slider' );
 				$img_atts = apply_filters( 'seo_slider_image_args', $schema['image'] );
 				$img_html = wp_get_attachment_image( $img_id, $img_size, false, $img_atts );
