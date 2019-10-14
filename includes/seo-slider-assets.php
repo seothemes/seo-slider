@@ -24,7 +24,7 @@ function seo_slider_admin_scripts_styles() {
 
 }
 
-add_action( 'wp_enqueue_scripts', 'seo_slider_scripts_styles' );
+add_action( 'wp_head', 'seo_slider_scripts_styles' );
 /**
  * Load frontend scripts and styles.
  *
@@ -33,9 +33,24 @@ add_action( 'wp_enqueue_scripts', 'seo_slider_scripts_styles' );
 function seo_slider_scripts_styles() {
 
 	// Enqueue frontend CSS.
-	wp_enqueue_style( 'seo-slider', plugin_dir_url( SEO_SLIDER_FILE ) . 'assets/styles/styles.min.css' );
+	wp_enqueue_style(
+		'seo-slider',
+		plugin_dir_url( SEO_SLIDER_FILE ) . 'assets/styles/styles.css',
+		[],
+		SEO_SLIDER_VERSION,
+		'all'
+	);
+
+	// Check if debugging is enabled.
+	$min = defined( 'SCRIPT_DEBUG' ) ? '' : '.min';
 
 	// Enqueue frontend JS.
-	wp_enqueue_script( 'seo-slider', plugin_dir_url( SEO_SLIDER_FILE ) . 'assets/scripts/scripts.min.js', [ 'jquery' ] );
+	wp_enqueue_script(
+		'seo-slider',
+		plugin_dir_url( SEO_SLIDER_FILE ) . 'assets/scripts/scripts' . $min . '.js',
+		[ 'jquery' ],
+		SEO_SLIDER_VERSION,
+		true
+	);
 
 }

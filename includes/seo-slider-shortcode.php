@@ -112,12 +112,16 @@ function seo_slider_shortcode( $atts ) {
 	}
 	";
 
-	if ( apply_filters( 'seo_slider_output_inline_js', true ) ) {
+	if ( apply_filters( 'seo_slider_output_inline_js', false ) ) {
 		$output .= sprintf( '<script>%s</script>', seo_slider_minify_js( $js ) );
+	} else {
+		wp_add_inline_script( 'seo-slider', seo_slider_minify_js( $js ) );
 	}
 
-	if ( apply_filters( 'seo_slider_output_inline_css', true ) ) {
+	if ( apply_filters( 'seo_slider_output_inline_css', false ) ) {
 		$output .= sprintf( '<style>%s</style>', seo_slider_minify_css( $css ) );
+	} else {
+		wp_add_inline_style( 'seo-slider', seo_slider_minify_css( $css ) );
 	}
 
 	ob_start();

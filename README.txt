@@ -53,6 +53,12 @@ This plugin uses the Slick Slider JavaScript plugin which supports keyboard arro
 
 == Changelog ==
 
+= 1.0.10 =
+* Fix conflict with corporate pro
+
+= 1.0.9 =
+* Move inline scripts and styles to footer
+
 = 1.0.8 =
 * Fix minor bugs when no slider is set
 

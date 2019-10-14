@@ -5,7 +5,7 @@
  * Description: A simple and lightweight, search engined optimized, accessible and mobile responsive slider plugin.
  * Author:      SEO Themes
  * Author URI:  https://seothemes.com
- * Version:     1.0.8
+ * Version:     1.0.10
  * Text Domain: seo-slider
  * Domain Path: /assets/lang
  * License:     GPL-2.0-or-later
@@ -24,6 +24,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 // Define constants.
 define( 'SEO_SLIDER_FILE', __FILE__ );
+define( 'SEO_SLIDER_VERSION', '1.0.10' );
 
 // Load CMB2 library.
 require_once 'cmb2/init.php';
