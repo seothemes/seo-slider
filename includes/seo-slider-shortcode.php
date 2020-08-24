@@ -161,7 +161,11 @@ function seo_slider_shortcode( $atts ) {
 					<div class="slick-content"<?php echo $schema['content']; ?>>
 
 						<?php if ( isset( $slide['seo_slider_content'] ) ) :
-							echo do_shortcode( wp_kses_post( wpautop( $slide['seo_slider_content'] ) ) );
+							printf( apply_filters(
+								'seo_slider_content_output',
+								do_shortcode( wp_kses_post( wpautop( $slide['seo_slider_content'] ) ) ),
+								$slide['seo_slider_content']
+							) );
 						endif; ?>
 
 					</div>
