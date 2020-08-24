@@ -5,12 +5,14 @@
  * @package SEOSlider
  */
 
+add_action( 'init', 'seo_slider_cpt', 0 );
 /**
  * Register Custom Post Type.
+ *
+ * @return void
  */
 function seo_slider_cpt() {
-
-	$labels = array(
+	$labels = [
 		'name'                  => _x( 'Sliders', 'Slider General Name', 'seo-slider' ),
 		'singular_name'         => _x( 'Slider', 'Slider Singular Name', 'seo-slider' ),
 		'menu_name'             => __( 'Sliders', 'seo-slider' ),
@@ -38,27 +40,27 @@ function seo_slider_cpt() {
 		'items_list'            => __( 'Sliders list', 'seo-slider' ),
 		'items_list_navigation' => __( 'Sliders list navigation', 'seo-slider' ),
 		'filter_items_list'     => __( 'Filter slides list', 'seo-slider' ),
-	);
-	$args = array(
-		'label'                 => __( 'Slider', 'seo-slider' ),
-		'description'           => __( 'Slider Description', 'seo-slider' ),
-		'labels'                => $labels,
-		'supports'              => array( 'title' ),
-		'hierarchical'          => false,
-		'public'                => false,
-		'show_ui'               => true,
-		'show_in_menu'          => true,
-		'menu_position'         => 5,
-		'menu_icon'             => 'dashicons-images-alt2',
-		'show_in_admin_bar'     => true,
-		'show_in_nav_menus'     => false,
-		'can_export'            => true,
-		'has_archive'           => false,
-		'exclude_from_search'   => true,
-		'publicly_queryable'    => true,
-		'capability_type'       => 'page',
-	);
-	register_post_type( 'slide', $args );
+	];
 
+	$args   = [
+		'label'               => __( 'Slider', 'seo-slider' ),
+		'description'         => __( 'Slider Description', 'seo-slider' ),
+		'labels'              => $labels,
+		'supports'            => [ 'title' ],
+		'hierarchical'        => false,
+		'public'              => false,
+		'show_ui'             => true,
+		'show_in_menu'        => true,
+		'menu_position'       => 5,
+		'menu_icon'           => 'dashicons-images-alt2',
+		'show_in_admin_bar'   => true,
+		'show_in_nav_menus'   => false,
+		'can_export'          => true,
+		'has_archive'         => false,
+		'exclude_from_search' => true,
+		'publicly_queryable'  => true,
+		'capability_type'     => 'page',
+	];
+
+	register_post_type( 'slide', $args );
 }
-add_action( 'init', 'seo_slider_cpt', 0 );

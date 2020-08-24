@@ -14,17 +14,15 @@ add_shortcode( 'slider', 'seo_slider_shortcode' );
  * @return string
  */
 function seo_slider_shortcode( $atts ) {
-
-	// Shortcode attributes.
-	$atts = shortcode_atts(
+	$atts   = shortcode_atts(
 		[
 			'id' => '1',
 		],
 		$atts
 	);
 
-	// Shortcode markup.
 	$output = '';
+
 	$schema = apply_filters( 'seo_slider_schema', [
 		'gallery' => ' itemscope itemtype="http://schema.org/ImageGallery"',
 		'object'  => ' itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject"',
@@ -46,12 +44,9 @@ function seo_slider_shortcode( $atts ) {
 		];
 	}
 
-	// Slider variables.
 	$id         = $atts['id'];
 	$prefix     = 'seo_slider_';
 	$breakpoint = apply_filters( 'seo_slider_breakpoint', 640 );
-
-	// Get slider settings.
 	$dots       = ( get_post_meta( $id, $prefix . 'dots', true ) ? 'true' : 'false' );
 	$arrows     = ( get_post_meta( $id, $prefix . 'arrows', true ) ? 'true' : 'false' );
 	$loop       = ( get_post_meta( $id, $prefix . 'loop', true ) ? 'true' : 'false' );
@@ -61,13 +56,10 @@ function seo_slider_shortcode( $atts ) {
 	$transition = get_post_meta( $id, $prefix . 'transition', true );
 	$mobile     = get_post_meta( $id, $prefix . 'mobile', true );
 	$desktop    = get_post_meta( $id, $prefix . 'desktop', true );
-	$image      = get_post_meta( $id, $prefix . 'image', true );
-	$content    = get_post_meta( $id, $prefix . 'content', true );
 	$overlay    = get_post_meta( $id, $prefix . 'overlay', true );
 	$text       = get_post_meta( $id, $prefix . 'text', true );
 	$slides     = get_post_meta( $id, $prefix . 'slides', true );
 
-	// Build JS.
 	$js = "
 	jQuery( document ).ready( function($) {
 		$( '.slick-slider-$id' ).slick( {
@@ -86,7 +78,6 @@ function seo_slider_shortcode( $atts ) {
 	} );
 	";
 
-	// Build CSS.
 	$css = "
 	.slick-slider-$id {
 		height: ${mobile}px;
@@ -113,15 +104,15 @@ function seo_slider_shortcode( $atts ) {
 	";
 
 	if ( apply_filters( 'seo_slider_output_inline_js', false ) ) {
-		$output .= sprintf( '<script>%s</script>', seo_slider_minify_js( $js ) );
+		$output .= sprintf( '<script>%s</script>', $js );
 	} else {
-		wp_add_inline_script( 'seo-slider', seo_slider_minify_js( $js ) );
+		wp_add_inline_script( seo_slider_get_slug(), $js );
 	}
 
 	if ( apply_filters( 'seo_slider_output_inline_css', false ) ) {
 		$output .= sprintf( '<style>%s</style>', seo_slider_minify_css( $css ) );
 	} else {
-		wp_add_inline_style( 'seo-slider', seo_slider_minify_css( $css ) );
+		wp_add_inline_style( seo_slider_get_slug(), seo_slider_minify_css( $css ) );
 	}
 
 	ob_start();

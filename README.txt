@@ -60,8 +60,11 @@ This plugin uses the Slick Slider JavaScript plugin which supports keyboard arro
 
 == Changelog ==
 
-= 1.0.11 =
+= 1.1.0 =
 * Added filter for content output
+* Added helper functions
+* Updated slick.js
+* Removed use of constants
 
 = 1.0.10 =
 * Fix conflict with corporate pro

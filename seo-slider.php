@@ -5,7 +5,7 @@
  * Description: A simple and lightweight, search engined optimized, accessible and mobile responsive slider plugin.
  * Author:      SEO Themes
  * Author URI:  https://seothemes.com
- * Version:     1.0.11
+ * Version:     1.1.0
  * Text Domain: seo-slider
  * Domain Path: /assets/lang
  * License:     GPL-2.0-or-later
@@ -22,35 +22,26 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-// Define constants.
-define( 'SEO_SLIDER_FILE', __FILE__ );
-define( 'SEO_SLIDER_VERSION', '1.0.10' );
-
 // Load CMB2 library.
 require_once 'cmb2/init.php';
 
 // Load slider helper functions.
-require_once 'includes/seo-slider-helpers.php';
+require_once 'includes/helpers.php';
 
 // Load slider metabox settings.
-require_once 'includes/seo-slider-settings.php';
+require_once 'includes/settings.php';
 
 // Load slider custom post type.
-require_once 'includes/seo-slider-cpt.php';
+require_once 'includes/cpt.php';
 
 // Load slider shortcode.
-require_once 'includes/seo-slider-shortcode.php';
+require_once 'includes/shortcode.php';
 
 // Load slider widget.
-require_once 'includes/seo-slider-widget.php';
+require_once 'includes/widget.php';
 
 // Load plugin assets.
-require_once 'includes/seo-slider-assets.php';
+require_once 'includes/assets.php';
 
-// Add custom image size.
-add_image_size( 'slider', 1280, 720, true );
-
-// Register the widget.
-add_action( 'widgets_init', function () {
-	register_widget( 'SEO_Slider_Widget' );
-} );
+// Set up plugin.
+require_once 'includes/setup.php';

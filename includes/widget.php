@@ -16,7 +16,6 @@ class SEO_Slider_Widget extends WP_Widget {
 	 * @return void
 	 */
 	public function __construct() {
-
 		$widget_ops = [
 			'classname'   => 'seo_slider_widget',
 			'description' => __( 'Displays a slider in a widget.', 'seo-slider' ),
@@ -34,7 +33,6 @@ class SEO_Slider_Widget extends WP_Widget {
 	 * @return void
 	 */
 	public function widget( $args, $instance ) {
-
 		if ( ! isset( $instance['slider'] ) ) {
 			return;
 		}
@@ -44,7 +42,7 @@ class SEO_Slider_Widget extends WP_Widget {
 		$id = get_page_by_title( $instance['slider'], OBJECT, 'slide' )->ID;
 
 		if ( $id ) {
-			echo do_shortcode( '[slider id="' . absint( $id ) . '"]' );
+			echo seo_slider_shortcode( [ 'id' => $id ] );
 		}
 
 		echo $args['after_widget'];
@@ -58,7 +56,6 @@ class SEO_Slider_Widget extends WP_Widget {
 	 * @return void
 	 */
 	public function form( $instance ) {
-
 		$title = isset( $instance['title'] ) ? $instance['title'] : __( 'Slider', 'seo-slider' );
 
 		?>
@@ -104,11 +101,8 @@ class SEO_Slider_Widget extends WP_Widget {
 	 * @return array
 	 */
 	public function update( $new_instance, $old_instance ) {
-
 		foreach ( $new_instance as $key => $value ) {
-
 			$updated_instance[ $key ] = sanitize_text_field( $value );
-
 		}
 
 		return $updated_instance;
