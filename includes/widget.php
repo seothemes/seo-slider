@@ -27,8 +27,8 @@ class SEO_Slider_Widget extends WP_Widget {
 	/**
 	 * Outputs the content of the widget
 	 *
-	 * @param  array $args     Widget args.
-	 * @param  array $instance Widget instance.
+	 * @param array $args     Widget args.
+	 * @param array $instance Widget instance.
 	 *
 	 * @return void
 	 */
@@ -51,7 +51,7 @@ class SEO_Slider_Widget extends WP_Widget {
 	/**
 	 * Outputs the options form on admin.
 	 *
-	 * @param  array $instance The widget options.
+	 * @param array $instance The widget options.
 	 *
 	 * @return void
 	 */
@@ -60,12 +60,20 @@ class SEO_Slider_Widget extends WP_Widget {
 
 		?>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:' ); ?></label>
-			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+			<label
+				for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:' ); ?></label>
+			<input class="widefat"
+				   id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"
+				   name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>"
+				   type="text" value="<?php echo esc_attr( $title ); ?>">
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'slider' ) ); ?>"><?php esc_html_e( 'Select Slider:', 'seo-slider' ); ?></label>
-			<select name="<?php echo esc_attr( $this->get_field_name( 'slider' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'slider' ) ); ?>" class="widefat">
+			<label
+				for="<?php echo esc_attr( $this->get_field_id( 'slider' ) ); ?>"><?php esc_html_e( 'Select Slider:', 'seo-slider' ); ?></label>
+			<select
+				name="<?php echo esc_attr( $this->get_field_name( 'slider' ) ); ?>"
+				id="<?php echo esc_attr( $this->get_field_id( 'slider' ) ); ?>"
+				class="widefat">
 				<?php
 				$slides = new WP_Query( [
 					'post_type'   => 'slide',
@@ -95,8 +103,8 @@ class SEO_Slider_Widget extends WP_Widget {
 	/**
 	 * Processes widget options on save.
 	 *
-	 * @param  array $new_instance The new options.
-	 * @param  array $old_instance The previous options.
+	 * @param array $new_instance The new options.
+	 * @param array $old_instance The previous options.
 	 *
 	 * @return array
 	 */

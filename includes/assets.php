@@ -14,7 +14,7 @@ add_action( 'admin_enqueue_scripts', 'seo_slider_admin_scripts_styles', 100 );
 function seo_slider_admin_scripts_styles() {
 	$screen = get_current_screen()->id;
 
-	if ( $screen && ( 'slide' === $screen || 'edit-slide' === $screen ) ) {
+	if ( 'slide' === $screen || 'edit-slide' === $screen ) {
 		wp_enqueue_style(
 			'seo-slider-admin',
 			seo_slider_get_url() . 'assets/styles/admin.css'
@@ -22,7 +22,7 @@ function seo_slider_admin_scripts_styles() {
 	}
 }
 
-add_action( 'wp_head', 'seo_slider_scripts_styles' );
+add_action( 'wp_enqueue_scripts', 'seo_slider_scripts_styles' );
 /**
  * Load frontend scripts and styles.
  *
@@ -34,7 +34,6 @@ function seo_slider_scripts_styles() {
 		seo_slider_get_url() . 'assets/styles/styles.css',
 		[],
 		seo_slider_get_asset_version( 'styles/styles.css' ),
-		'all'
 	);
 
 	wp_enqueue_script(

@@ -2,18 +2,15 @@
 /**
  * Plugin Name: SEO Slider
  * Plugin URI:  https://seothemes.com/plugins/seo-slider
- * Description: A simple and lightweight, search engined optimized, accessible and mobile responsive slider plugin.
- * Author:      SEO Themes
- * Author URI:  https://seothemes.com
- * Version:     1.1.0
- * Text Domain: seo-slider
- * Domain Path: /assets/lang
- * License:     GPL-2.0-or-later
- * License URI: http://www.opensource.org/licenses/gpl-license.php
+ * Description: A simple and lightweight, search engined optimized, accessible
+ * and mobile responsive slider plugin. Author:      SEO Themes Author URI:
+ * https://seothemes.com Version:     1.1.1 Text Domain: seo-slider Domain
+ * Path: /assets/lang License:     GPL-2.0-or-later License URI:
+ * http://www.opensource.org/licenses/gpl-license.php
  *
+ * @author      Seo Themes
  * @package     SEOSlider
  * @link        https://seothemes.com/plugins/seo-slider
- * @author      Seo Themes
  * @copyright   Copyright © 2019 Seo Themes
  */
 

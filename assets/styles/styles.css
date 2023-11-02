@@ -138,10 +138,6 @@
 	position: absolute;
 }
 
-.no-object-fit .slick-slide .slick-image {
-	display: none;
-}
-
 .slick-initialized .slick-slide {
 	display: flex;
 	align-items: center;
